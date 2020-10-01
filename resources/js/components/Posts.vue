@@ -3,7 +3,7 @@
         <div v-if="user.id">
             <v-row class="white rounded-t-lg" v-if="newPost">
                 <v-col cols="4">
-                    <a><v-img :src="post.imgurl"></v-img></a>
+                    <a><v-img class="width: 100%" aspect-ratio="1.4" :src="post.imgurl"></v-img></a>
                 </v-col>
                 <v-col cols="8">
                     <div>
@@ -12,8 +12,9 @@
                         <div>
                             <v-textarea :error-messages="errors.body" label="Opis" rows="1" color="orange" v-model="post.body"></v-textarea>
                         </div>
+                        <v-text-field :error-messages="errors.tags" label="Tagi" dense color="blue" placeholder="np. polska europa polityka" v-model="post.tags"></v-text-field>
                         <v-btn class="primary" @click="addPost">Dodaj</v-btn>
-                        <v-btn class="text" @click="newPost = false; errors = []">Anuluj</v-btn>
+                        <v-btn class="text" @click="newPost = false; clearForm()">Anuluj</v-btn>
                     </div>
                 </v-col>
             </v-row>
@@ -78,6 +79,7 @@
                 this.post.body = null;
                 this.post.imgurl = null;
                 this.post.tags = null;
+                this.errors = [];
             },
         },
         computed: {

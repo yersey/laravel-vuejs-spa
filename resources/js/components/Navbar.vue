@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav class="fixed-bar">
         <v-toolbar>
             <a href="#/" class="text-decoration-none d-none d-sm-inline" style="width:285px">
                 <span class="blue--text text--darken-2 text-h3">vikop</span>
@@ -127,6 +127,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .fixed-bar {
+        position: sticky;
+        position: -webkit-sticky; /* for Safari */
+        z-index: 2;
+        top: 0.01px;
+    }
 </style>
