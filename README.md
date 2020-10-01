@@ -16,6 +16,34 @@
 * Github
 * Google Chrome Debug Console
 
+## Features
+* Posts
+** Dig Post
+** Comment
+** Edit
+** Delete
+* Microblog
+** Plus Microblog Entry
+** Comment Microblog Entry
+** Edit
+** Delete
+* Messages
+* Plus Comments
+* Reply to Comments
+* Tags
+* Notifications
+** Tag Use
+** Mentioned
+** Follow Tag
+* Account
+** Register
+** Login
+** Set Avatar
+* Profile
+** User Posts
+** User Microblog Entries
+** User Followed Tags 
+
 ## Database
 ![database](images/baza.png)
 
