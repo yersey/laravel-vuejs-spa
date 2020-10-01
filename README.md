@@ -13,11 +13,11 @@
 * Git
 * Postman
 * Visual Studio Code
-* github
+* Github
 * Google Chrome Debug Console
 
 ## Database
-![database](baza.png)
+![database](images/baza.png)
 
 * Tabela „users” jest odpowiedzialna za przechowywanie użytkowników. Zawiera podstawowe dane użytkownika. Hasło przechowywane jest w postaci szyfrogramu.
 * Tabela „posts” jest przechowuje posty dodane przez użytkowników. Zawiera jedno relacyjne pole – id właściciela posta.
