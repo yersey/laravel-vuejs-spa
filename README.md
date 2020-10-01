@@ -9,7 +9,7 @@
 ## Frameworks
 * Laravel 7.2
 * Vue 2.6
-##Tools/Programs
+## Tools/Programs
 * Git
 * Postman
 * Visual Studio Code
@@ -50,17 +50,16 @@
 ## Database
 ![database](images/baza.png)
 
-* Tabela „users” jest odpowiedzialna za przechowywanie użytkowników. Zawiera podstawowe dane użytkownika. Hasło przechowywane jest w postaci szyfrogramu.
-* Tabela „posts” jest przechowuje posty dodane przez użytkowników. Zawiera jedno relacyjne pole – id właściciela posta.
-* Tabela „wpis” zawiera wszystkie wpisy użytkowników. Zawiera jedno relacyjne pole – id właściciela posta.
-* Tabela „wykops” przechowuje wszystkie „wykopy” postów. Każdy „wykop” jest w postaci osobnego rekordu. Zawiera dwa relacyjne pola – id wykopującego i id wykopywanego postu.
-* Tabela „messages” odpowiedzialna jest za przechowywanie wszystkich wiadomości. Zawiera podstawowe dane wiadomości, w tym pole „conversation”, na podstawie którego grupowane są wiadomości. Zawiera dwa relacyjne pola – id użytkownika wysyłającego wiadomość oraz id adresata.
-* Tabela „comments” jest odpowiedzialna za przechowywanie komentarzy, zachodzi tutaj typ relacji polimorficznej, co oznacza, że tabela nie musi być ściśle powiązana z inną tabelą np. osobna tabela komentarzy do postów wpisów, jako odpowiedz do innego komentarza, ale może się dostosować zależnie od typu komentarza za pomocą pola „commentable_type” – w tym polu znajduje się model np. „App\Wpis”, mając taką informacje aplikacja wie, że komentarz tyczy się wpisu, a nie np. postu. Następnie pobierane jest pole „commentable_id”, które pozwoli aplikacji na zidentyfikowanie, do jakiego już konkretnie np. wpisu  należy komentarz. Podobne relacje zostały zastosowane w tabelach „pluses” oraz „notifications”. Pozwala to na trzymanie wszystkich komentarzy, wpisów, notyfikacji w jednej tabeli, a następnie relacyjne powiązanie z nimi po modelu jak zostało wytłumaczone powyżej.
-* Tabela „pluses” jest odpowiedzialna za przechowywanie plusów, zaimplementowana jest w taki sam sposób jak tabela „comments” oraz „notifications”, przez tak zwane relacje polimorficzne.
-* Tabela „notifications” jest odpowiedzialna za przechowywanie powiadomień (notyfikacji) w systemie. Każde powiadomienie zawiera następujące pola: typ powiadomienia, identyfikator powiadomienia, pole na dane w formacie JSON, datę odczytania powiadomienia oraz datę utworzenia powiadomienia, tabela zaimplementowana jest w taki sam sposób jak tabela „comments” oraz „pluses”, przez tak zwane relacje polimorficzne.
-* Tabela „tags” przechowuje tagi, które zapisywane są do bazy w momencie ich pierwszego użycia we wpisie lub poście. Dzięki tabelom: „post_tab”, „tag_wpis” na podstawie relacji many to many aplikacja wie, w jakim wpisie lub poście zostały użyte konkretne tagi. 
-Tabela „tag_user” informacje o tym jakie tagi obserwuje dany użytkownik
-* Tabele „migrations”, „failed_jobs”, „password_resets” są domyślnymi tabelami frameworka Laravel
+* The "users" table is responsible for storing the users. Contains basic user data. The password is stored in the form of a ciphertext.
+* The "posts" table is used to store posts added by users. It contains one relational field - post owner id.
+* The "wpis" table contains all user entries. It contains one relational field - wpis owner id.
+* The "wykops" table stores all posts digs. Each "dig" is in the form of a separate record. It contains two relational fields - user id and post id.
+* The "messages" table is responsible for storing all messages. Contains basic message data, including the "conversation" field on the basis of which messages are grouped. It contains two relational fields - the id of the user sending the message and the id of the recipient.
+* The "comments" table is responsible for storing comments, there is a type of polymorphic relationship here, which means that the table does not have to be closely related to another table, e.g. a separate comment table for posts, separate for replies to another comment, but it can adapt depending on on the type of comment using the "commentable_type" field - this field contains a model, eg "App\Wpis", having such information, the application knows that the comment relates to the entry, not a post. Then, the "commentable_id" field is downloaded, which will allow the application to identify which specific entry a comment belongs to. Similar relations were used in the tables "pluses" and "notifications". This allows you to keep all the comments in one table and then relate to them by model.
+* The "pluses" table is responsible for storing pluses, it is implemented in the same way as the "comments" and "notifications" tables, by so-called polymorphic relations.
+* The "notifications" table is responsible for storing notifications in the system. Each notification contains the following fields: notification type, notification ID, JSON data field, notification read date and notification creation date, the table is implemented in the same way as the "comments" and "pluses" tables, by so-called polymorphic relations.
+* The "tags" table stores tags that are written to the database when they are first used in an entry or post. Thanks to the tables: "post_tab", "tag_wpis" based on the many to many relation, the application knows in which entry or post specific tags were used. The "tag_user" table - information about tags that the user is watching
+* Tables "migrations", "failed_jobs", "password_resets" are the default tables of the Laravel framework
 
 ### The website is fully responsive
 
