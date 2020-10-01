@@ -1928,6 +1928,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'app',
@@ -22227,7 +22235,39 @@ var render = function() {
       _c(
         "v-main",
         { staticClass: "grey lighten-3" },
-        [_c("v-container", { staticClass: "mt-6" }, [_c("router-view")], 1)],
+        [
+          _c(
+            "v-container",
+            { staticClass: "mt-6 mb-10" },
+            [_c("router-view")],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-footer",
+            {
+              staticClass: "primary",
+              staticStyle: { "box-shadow": "0px 0 5px black" },
+              attrs: { absolute: "" }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "white--text text-decoration-none mx-auto",
+                  attrs: { href: "https://github.com/yersey/laravel-vuejs-spa" }
+                },
+                [
+                  _c("v-icon", { staticClass: "white--text" }, [
+                    _vm._v("code")
+                  ]),
+                  _vm._v("\n           Github\n         ")
+                ],
+                1
+              )
+            ]
+          )
+        ],
         1
       )
     ],
