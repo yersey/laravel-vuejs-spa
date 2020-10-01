@@ -18,34 +18,34 @@
 
 ## Features
 * Posts
-    ** Dig Post
-    ** Edit
-    ** Delete
+    - Dig Post
+    - Edit
+    - Delete
 * Microblog
-    ** Plus Microblog Entry
-    ** Edit
-    ** Delete
+    - Plus Microblog Entry
+    - Edit
+    - Delete
 * Comment
-    ** Comment Post
-    ** Comment Microblog Entry
-    ** Edit
-    ** Update
-    ** Plus
-    ** Reply
+    - Comment Post
+    - Comment Microblog Entry
+    - Edit
+    - Update
+    - Plus
+    - Reply
 * Messages
 * Tags
 * Notifications
-    ** Tag Use
-    ** Mentioned
-    ** Follow Tag
+    - Tag Use
+    - Mentioned
+    - Follow Tag
 * Account
-    ** Register
-    ** Login
-    ** Set Avatar
+    - Register
+    - Login
+    - Set Avatar
 * Profile
-    ** User Posts
-    ** User Microblog Entries
-    ** User Followed Tags 
+    - User Posts
+    - User Microblog Entries
+    - User Followed Tags 
 
 ## Database
 ![database](images/baza.png)
