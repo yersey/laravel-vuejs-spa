@@ -29,7 +29,7 @@
     - Comment Post
     - Comment Microblog Entry
     - Edit
-    - Update
+    - Delete
     - Plus
     - Reply
 * Messages
