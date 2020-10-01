@@ -1,61 +1,36 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Laravel Vue SPA app
+![app](images/app.gif)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Programming Languages
+* PHP
+* JavaScript
+* HTML
+* CSS
+## Frameworks
+* Laravel 7.2
+* Vue 2.6
+##Tools/Programs
+* Git
+* Postman
+* Visual Studio Code
+* github
+* Google Chrome Debug Console
 
-## About Laravel
+## Database
+![database](baza.png)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* Tabela „users” jest odpowiedzialna za przechowywanie użytkowników. Zawiera podstawowe dane użytkownika. Hasło przechowywane jest w postaci szyfrogramu.
+* Tabela „posts” jest przechowuje posty dodane przez użytkowników. Zawiera jedno relacyjne pole – id właściciela posta.
+* Tabela „wpis” zawiera wszystkie wpisy użytkowników. Zawiera jedno relacyjne pole – id właściciela posta.
+* Tabela „wykops” przechowuje wszystkie „wykopy” postów. Każdy „wykop” jest w postaci osobnego rekordu. Zawiera dwa relacyjne pola – id wykopującego i id wykopywanego postu.
+* Tabela „messages” odpowiedzialna jest za przechowywanie wszystkich wiadomości. Zawiera podstawowe dane wiadomości, w tym pole „conversation”, na podstawie którego grupowane są wiadomości. Zawiera dwa relacyjne pola – id użytkownika wysyłającego wiadomość oraz id adresata.
+* Tabela „comments” jest odpowiedzialna za przechowywanie komentarzy, zachodzi tutaj typ relacji polimorficznej, co oznacza, że tabela nie musi być ściśle powiązana z inną tabelą np. osobna tabela komentarzy do postów wpisów, jako odpowiedz do innego komentarza, ale może się dostosować zależnie od typu komentarza za pomocą pola „commentable_type” – w tym polu znajduje się model np. „App\Wpis”, mając taką informacje aplikacja wie, że komentarz tyczy się wpisu, a nie np. postu. Następnie pobierane jest pole „commentable_id”, które pozwoli aplikacji na zidentyfikowanie, do jakiego już konkretnie np. wpisu  należy komentarz. Podobne relacje zostały zastosowane w tabelach „pluses” oraz „notifications”. Pozwala to na trzymanie wszystkich komentarzy, wpisów, notyfikacji w jednej tabeli, a następnie relacyjne powiązanie z nimi po modelu jak zostało wytłumaczone powyżej.
+* Tabela „pluses” jest odpowiedzialna za przechowywanie plusów, zaimplementowana jest w taki sam sposób jak tabela „comments” oraz „notifications”, przez tak zwane relacje polimorficzne.
+* Tabela „notifications” jest odpowiedzialna za przechowywanie powiadomień (notyfikacji) w systemie. Każde powiadomienie zawiera następujące pola: typ powiadomienia, identyfikator powiadomienia, pole na dane w formacie JSON, datę odczytania powiadomienia oraz datę utworzenia powiadomienia, tabela zaimplementowana jest w taki sam sposób jak tabela „comments” oraz „pluses”, przez tak zwane relacje polimorficzne.
+* Tabela „tags” przechowuje tagi, które zapisywane są do bazy w momencie ich pierwszego użycia we wpisie lub poście. Dzięki tabelom: „post_tab”, „tag_wpis” na podstawie relacji many to many aplikacja wie, w jakim wpisie lub poście zostały użyte konkretne tagi. 
+Tabela „tag_user” informacje o tym jakie tagi obserwuje dany użytkownik
+* Tabele „migrations”, „failed_jobs”, „password_resets” są domyślnymi tabelami frameworka Laravel
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### The website is fully responsive
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![phone](images/phone.png)
