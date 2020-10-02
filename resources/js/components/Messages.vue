@@ -7,7 +7,7 @@
         <v-col cols="9" md="8">
             <div v-if="new_message || conversations.length == 0">
                 <v-text-field v-model="message.message" label="Treść wiadomości..."></v-text-field>
-                <v-text-field v-model="message.to_id" label="Id użytkownika"></v-text-field>
+                <v-text-field v-model="message.to_id" label="Nazwa użytkownika"></v-text-field>
                 <button @click="addMessage">Wyślij wiadomość</button>
             </div>
             <div v-else>
