@@ -45,7 +45,7 @@
                 </div>
                 <a class="text-decoration-none" :href="`#/post/${post.id}`"><h2>{{ post.title }}</h2></a>
                 <a :href="'/#/user/'+post.user_name" class="text-decoration-none">@{{ post.user_name }}</a>  strona.com
-                <v-chip x-small link :to="'tag/'+tag.name" class="text mx-1 my-1" v-for="tag in post.tag" :key="tag.id">#{{ tag.name }}</v-chip>
+                <v-chip x-small link :to="'/tag/'+tag.name" class="text mx-1 my-1" v-for="tag in post.tag" :key="tag.id">#{{ tag.name }}</v-chip>
                 <p style="word-break: break-all">
                     {{ post.body }}
                 </p>
