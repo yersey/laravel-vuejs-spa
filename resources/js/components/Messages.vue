@@ -15,7 +15,7 @@
                 <v-row>
                     <v-col cols="8" md="10">
                         <v-text-field v-model="message.message" label="Treść wiadomości..."></v-text-field>
-                        <v-text-field v-model="message.with_user_name" v-show="false"></v-text-field>
+                        <v-text-field v-model="message.to_id" v-show="false"></v-text-field>
                     </v-col>
                     <v-col cols="4" md="2">
                         <v-btn @click="addMessage" class="mt-5">Wyślij</v-btn>
@@ -53,7 +53,7 @@
                 .then(response => {
                     this.conversation = response.data.messages;
                     this.user_name = response.data.user.with_user_name;
-                    this.message.to_id = response.data.user.with_user_id;
+                    this.message.to_id = response.data.user.with_user_name;
                 });
             },
             addMessage: function() {
