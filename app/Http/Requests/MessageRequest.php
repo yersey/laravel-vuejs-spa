@@ -20,7 +20,7 @@ class MessageRequest extends FormRequest
     {
         return [
             'message' => 'required|min:1|max:1024',
-            'to_id' => 'required|integer',
+            'to_id' => 'required|string',
         ];
     }
 

@@ -17,18 +17,19 @@ class MessageController extends Controller
 
     public function store(MessageRequest $request)
     {
-        User::findOrFail($request->to_id);
+        $user = User::where('name', $request->to_id)->firstOrFail();
+        $to_id = $user->id; 
 
-        if(auth()->user()->id < $request->to_id){
-            $conversation = auth()->user()->id."-".$request->to_id;
+        if(auth()->user()->id < $to_id){
+            $conversation = auth()->user()->id."-".$to_id;
         }else{
-            $conversation = $request->to_id."-".auth()->user()->id;
+            $conversation = $to_id."-".auth()->user()->id;
         }
         
         $message = new Message();
         $message->message = $request->message;
         $message->user_id = auth()->user()->id;
-        $message->to_id = $request->to_id;
+        $message->to_id = $to_id;
         $message->conversation = $conversation;
         $message->save();
     }
@@ -55,11 +56,17 @@ class MessageController extends Controller
             $conversation = Message::where('conversation', $conversation_id)->get();
             Message::where('conversation', $conversation_id)->where('to_id', auth()->user()->id)->update(array('read_at' => now()));
         }else{
-            $id = Message::where('to_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()->first()->conversation;
-            $conversation = Message::where('conversation', $id)->get();
-            Message::where('conversation', $id)->where('to_id', auth()->user()->id)->update(array('read_at' => now()));
+            $conv = Message::where('to_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()->first();
+            if($conv){
+                $conversation = Message::where('conversation', $conv->conversation)->get();
+                Message::where('conversation', $conv->conversation)->where('to_id', auth()->user()->id)->update(array('read_at' => now()));
+                return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)[0]]);
+            }else{
+                return response()->json(['messages' => MessageResource::collection([]), 'user' => MessageResource::collection([])]);
+            }
+            
         }
+		return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)[0]]);
         
-        return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)[0]]);
     }
 }
