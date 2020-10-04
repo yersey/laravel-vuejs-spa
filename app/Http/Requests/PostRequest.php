@@ -42,7 +42,7 @@ class PostRequest extends FormRequest
             'body.max'  => 'Treść jest zbyt długa.',
             'imgurl.required'  => 'Link do obrazka jest wymagany.',
             'imgurl.url'  => 'Link do obrazka jest nieprawidłowy.',
-            'tags.regex'  => 'W tagach znajduja się niedozwolone znaki.',
+            'tags.regex'  => 'W tagach znajdują się niedozwolone znaki.',
         ];
     }
 }

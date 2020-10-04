@@ -40,7 +40,7 @@ export default {
                     
                 })
                 .catch(error => {
-                    this.avatar_errors = error.response.data.avatar;
+                    this.avatar_errors = error.response.data.errors.avatar;
                 });
             }
         },

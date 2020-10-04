@@ -3741,7 +3741,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.avatar_errors = [];
         _this.avatar = null;
       })["catch"](function (error) {
-        _this.avatar_errors = error.response.data.avatar;
+        _this.avatar_errors = error.response.data.errors.avatar;
       });
     }
   },

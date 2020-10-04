@@ -10,16 +10,6 @@ use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('jwt.auth', ['except' => ['login', 'register', 'refresh']]);
-    }
-
     public function register(RegisterRequest $request)
     {
         $user = User::create($request->only(['name', 'email', 'password']));

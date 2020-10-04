@@ -10,11 +10,6 @@ use App\Http\Resources\MessageResource;
 
 class MessageController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('jwt.auth');
-    }
-
     public function store(MessageRequest $request)
     {
         $user = User::where('name', $request->to_id)->firstOrFail();

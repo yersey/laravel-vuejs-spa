@@ -12,11 +12,6 @@ use App\Http\Resources\TagResource;
 
 class TagController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('jwt.auth', ['except' => ['show', 'index']]);
-    }
-
     public function index()
     {
         $tags = Tag::all();

@@ -11,11 +11,6 @@ use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        //$this->middleware('jwt.auth', ['except' => ['index', 'show']]);
-    }
-
     public function show($name)
     {
         $user = User::where('name', $name)->firstOrFail();

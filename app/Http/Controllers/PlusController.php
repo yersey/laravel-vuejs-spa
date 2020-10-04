@@ -10,11 +10,6 @@ use App\Plus;
 
 class PlusController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('jwt.auth');
-    }
-
     public function store(Request $request){
         $rules = [
             'id' => 'required|integer',

@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('jwt.auth', ['except' => ['show']]);
-    }
-
     public function show($id)
     {
         $comment = Comment::FindOrFail($id);
@@ -48,7 +43,7 @@ class CommentController extends Controller
             if($mentioned){
                 Notification::send($mentioned, new Mentioned('comment', $entry->id, 'entry'));
             }
-        }else{
+        }else if($request->model == 'comment'){
             $comment = Comment::findOrFail($request->id);
             $comment->comment()->save(new Comment(['body' => filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS)]));
             if($mentioned){
