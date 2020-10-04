@@ -19,8 +19,8 @@ class Plus extends Model
         return $this->morphTo();
     }
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

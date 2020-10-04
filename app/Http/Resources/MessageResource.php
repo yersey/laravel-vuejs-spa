@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class MessageResource extends JsonResource
 {
@@ -23,7 +24,7 @@ class MessageResource extends JsonResource
             'user_avatar' => $this->withh->avatar,
             'conversation' => $this->conversation,
             'created_at' => $this->created_at,
-            'created_at_' => $this->created_at_(),
+            'when' => (new Carbon($this->created_at))->locale('pl')->diffForHumans(),
             'read_at' => $this->read_at,
         ];
     }

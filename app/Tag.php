@@ -10,18 +10,18 @@ class Tag extends Model
         'name',
     ];
     
-    public function Entry()
+    public function entry()
     {
-        return $this->belongsToMany('App\Entry');
+        return $this->belongsToMany(Entry::class);
     }
     
-    public function Post()
+    public function post()
     {
-        return $this->belongsToMany('App\Post');
+        return $this->belongsToMany(Post::class);
     }
     
-    public function User()
+    public function user()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany(User::class);
     }
 }

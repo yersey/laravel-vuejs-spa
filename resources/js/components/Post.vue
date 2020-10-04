@@ -50,7 +50,7 @@
                     {{ post.body }}
                 </p>
                 <p>
-                    {{ post.comments.length }} komentarzy {{ post.created_at_ }}
+                    {{ post.comments.length }} komentarzy {{ post.when }}
                 </p>
             </div>
         </v-col>
@@ -81,7 +81,7 @@
                     this.post.imgurl = response.data.data.imgurl;
                     this.post.user_id = response.data.data.user_id;
                     this.post.user_name = response.data.data.user_name;
-                    this.post.created_at_ = response.data.data.created_at_;
+                    this.post.when = response.data.data.when;
                     this.post.digs = response.data.data.digs;
                     this.post.isDig = response.data.data.isDig;
                     this.post.comments = response.data.data.comments;

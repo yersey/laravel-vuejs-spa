@@ -2085,7 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.comment.body = response.data.data.body;
         _this.comment.user_id = response.data.data.user_id;
         _this.comment.user_name = response.data.data.user_name;
-        _this.comment.created_at_ = response.data.data.created_at_;
+        _this.comment.when = response.data.data.when;
         _this.comment.pluses = response.data.data.pluses;
         _this.comment.isPlus = response.data.data.isPlus;
         _this.comment.comments = response.data.data.comments;
@@ -2453,7 +2453,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.entry.body = response.data.data.body;
         _this.entry.user_id = response.data.data.user_id;
         _this.entry.user_name = response.data.data.user_name;
-        _this.entry.created_at_ = response.data.data.created_at_;
+        _this.entry.when = response.data.data.when;
         _this.entry.pluses = response.data.data.pluses;
         _this.entry.isPlus = response.data.data.isPlus;
         _this.entry.comments = response.data.data.comments;
@@ -2563,7 +2563,7 @@ __webpack_require__.r(__webpack_exports__);
         body: null,
         user_id: null,
         user_name: null,
-        created_at_: null,
+        when: null,
         pluses: null,
         isPlus: null,
         comments: []
@@ -3188,7 +3188,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.post.imgurl = response.data.data.imgurl;
         _this.post.user_id = response.data.data.user_id;
         _this.post.user_name = response.data.data.user_name;
-        _this.post.created_at_ = response.data.data.created_at_;
+        _this.post.when = response.data.data.when;
         _this.post.digs = response.data.data.digs;
         _this.post.isDig = response.data.data.isDig;
         _this.post.comments = response.data.data.comments;
@@ -3292,7 +3292,7 @@ __webpack_require__.r(__webpack_exports__);
         imgurl: null,
         user_id: null,
         user_name: null,
-        created_at_: null,
+        when: null,
         digs: null,
         isDig: null,
         comments: []
@@ -22394,7 +22394,7 @@ var render = function() {
                         [_vm._v(_vm._s(_vm.comment.user_name))]
                       ),
                       _vm._v(" "),
-                      _c("a", [_vm._v(_vm._s(_vm.comment.created_at_))]),
+                      _c("a", [_vm._v(_vm._s(_vm.comment.when))]),
                       _vm._v(" "),
                       _c("div", { staticClass: "float-right green--text" }, [
                         _vm._v(
@@ -22637,7 +22637,7 @@ var render = function() {
                                   [_vm._v(_vm._s(comment.user_name))]
                                 ),
                                 _vm._v(" "),
-                                _c("a", [_vm._v(_vm._s(comment.created_at_))]),
+                                _c("a", [_vm._v(_vm._s(comment.when))]),
                                 _vm._v(" "),
                                 _c(
                                   "div",
@@ -23415,7 +23415,7 @@ var render = function() {
                           staticClass: "text-decoration-none",
                           attrs: { href: "#/mirko/" + _vm.entry.id }
                         },
-                        [_vm._v(_vm._s(_vm.entry.created_at_))]
+                        [_vm._v(_vm._s(_vm.entry.when))]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "float-right green--text" }, [
@@ -25159,7 +25159,7 @@ var render = function() {
                               "\n                " +
                                 _vm._s(_vm.post.comments.length) +
                                 " komentarzy " +
-                                _vm._s(_vm.post.created_at_) +
+                                _vm._s(_vm.post.when) +
                                 "\n            "
                             )
                           ])
@@ -25601,7 +25601,11 @@ var render = function() {
             _c("p", { staticClass: "text-h4" }, [
               _vm._v(_vm._s(_vm.profile.name))
             ]),
-            _vm._v("\n            od 2 tyg. na vikop\n        ")
+            _vm._v(
+              "\n            od " +
+                _vm._s(_vm.profile.when) +
+                " na vikop\n        "
+            )
           ])
         ],
         1
@@ -26177,7 +26181,7 @@ var render = function() {
             body: "testowy wpis",
             user_id: 1,
             user_name: "Daniel",
-            created_at_: 123,
+            when: 123,
             pluses: 7,
             isPlus: true,
             comments: []

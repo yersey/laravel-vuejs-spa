@@ -9,7 +9,7 @@
                     <v-btn small fab href="/#/settings"><v-icon>settings</v-icon></v-btn>
                 </div>
                 <p class="text-h4">{{ profile.name }}</p>
-                od 2 tyg. na vikop
+                od {{ profile.when }} na vikop
             </v-col>
         </v-row>
         <v-row class="mt-2 white elevation-1">

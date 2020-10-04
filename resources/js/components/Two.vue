@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <entry :entry="{ id: 1, body: 'testowy wpis', user_id: 1, user_name: 'Daniel', created_at_: 123, pluses: 7, isPlus: true, comments: [] }"></entry>
+    <entry :entry="{ id: 1, body: 'testowy wpis', user_id: 1, user_name: 'Daniel', when: 123, pluses: 7, isPlus: true, comments: [] }"></entry>
   </div>
 </template>
 

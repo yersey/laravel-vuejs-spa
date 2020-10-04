@@ -11,7 +11,7 @@
             </v-col>
             <v-col cols="10" md="11" v-else class="pl-5 pl-sm-2">
                 <a :href="'/#/user/'+entry.user_name" class="text-decoration-none">{{ entry.user_name }}</a> 
-                <a :href="`#/mirko/${entry.id}`" class="text-decoration-none">{{ entry.created_at_ }}</a>
+                <a :href="`#/mirko/${entry.id}`" class="text-decoration-none">{{ entry.when }}</a>
                 <div class="float-right green--text">
                     {{ entry.pluses }}
                     <a v-if="entry.user_id != user.id && user.id">
@@ -56,7 +56,7 @@
                     this.entry.body = response.data.data.body;
                     this.entry.user_id = response.data.data.user_id;
                     this.entry.user_name = response.data.data.user_name;
-                    this.entry.created_at_ = response.data.data.created_at_;
+                    this.entry.when = response.data.data.when;
                     this.entry.pluses = response.data.data.pluses;
                     this.entry.isPlus = response.data.data.isPlus;
                     this.entry.comments = response.data.data.comments;

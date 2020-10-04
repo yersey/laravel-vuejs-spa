@@ -23,24 +23,23 @@ class Comment extends Model
         return $this->morphTo();
     }
 
-    public function Comment()
+    public function comment()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
-    public function Plus()
+    public function plus()
     {
-        return $this->morphMany('App\Plus', 'plusable');
+        return $this->morphMany(Plus::class, 'plusable');
     }
 
     public function isPlus()
     {   
-        return $this->morphMany('App\Plus', 'plusable')->where('user_id', auth()->user()->id)->exists();
+        return $this->morphMany(Plus::class, 'plusable')->where('user_id', auth()->user()->id)->exists();
     }
-    
 }

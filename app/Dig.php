@@ -14,13 +14,13 @@ class Dig extends Model
         });
     }
 
-    public function Post()
+    public function post()
     {
-        return $this->belongsTo('App\Post');
+        return $this->belongsTo(Post::class);
     }
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

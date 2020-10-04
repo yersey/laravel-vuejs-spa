@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\CommentResource;
+use Carbon\Carbon;
 
 class CommentResource extends JsonResource
 {
@@ -22,7 +23,7 @@ class CommentResource extends JsonResource
             'user_name' => $this->user->name,
             'user_avatar' => $this->user->avatar,
             'created_at' => $this->created_at,
-            'created_at_' => $this->created_at_(),
+            'when' => (new Carbon($this->created_at))->locale('pl')->diffForHumans(),
             'pluses' => $this->plus()->count(),
             'isPlus' => auth()->user() ? $this->isPlus() : false,
             'comments' => CommentResource::collection($this->comment),

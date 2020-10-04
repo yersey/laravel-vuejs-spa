@@ -11,7 +11,7 @@
             </v-col>
             <v-col cols="10" md="11" v-else class="pl-5 pl-sm-2">
                 <a :href="'/#/user/'+comment.user_name" class="text-decoration-none">{{ comment.user_name }}</a> 
-                <a>{{ comment.created_at_ }}</a>
+                <a>{{ comment.when }}</a>
                 <div class="float-right green--text">
                     {{ comment.pluses }} 
                     <a v-if="comment.user_id != user.id && user.id">
@@ -46,7 +46,7 @@
                     </v-col>
                     <v-col cols="10" md="11" v-else>
                         <a :href="'/#/user/'+comment.user_name" class="text-decoration-none">{{ comment.user_name }}</a> 
-                        <a>{{ comment.created_at_ }}</a>
+                        <a>{{ comment.when }}</a>
                         <div class="float-right green--text">
                             {{ comment.pluses }} 
                             <a v-if="comment.user_id != user.id && user.id">
@@ -113,7 +113,7 @@
                     this.comment.body = response.data.data.body;
                     this.comment.user_id = response.data.data.user_id;
                     this.comment.user_name = response.data.data.user_name;
-                    this.comment.created_at_ = response.data.data.created_at_;
+                    this.comment.when = response.data.data.when;
                     this.comment.pluses = response.data.data.pluses;
                     this.comment.isPlus = response.data.data.isPlus;
                     this.comment.comments = response.data.data.comments;

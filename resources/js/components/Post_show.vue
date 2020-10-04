@@ -35,7 +35,7 @@
                         imgurl: null, 
                         user_id: null, 
                         user_name: null, 
-                        created_at_: null, 
+                        when: null, 
                         digs: null, 
                         isDig: null, 
                         comments: []

@@ -63,43 +63,43 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function Post()
+    public function post()
     {
-        return $this->hasMany('App\Post');
+        return $this->hasMany(Post::class);
     }
 
-    public function Dig()
+    public function dig()
     {
-        return $this->hasMany('App\Dig');
+        return $this->hasMany(Dig::class);
     }
     
-    public function Entry()
+    public function entry()
     {
-        return $this->hasMany('App\Entry');
+        return $this->hasMany(Entry::class);
     }
     
-    public function Comment()
+    public function comment()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
     }
     
-    public function Plus()
+    public function plus()
     {
-        return $this->hasMany('App\Plus');
+        return $this->hasMany(Plus::class);
     }
 
-    public function Message()
+    public function message()
     {
-        return $this->hasMany('App\Message');
+        return $this->hasMany(Message::class);
     } 
 
-    public function MessagesSendToMe()
+    public function messagesSendToMe()
     {
-        return $this->hasMany('App\Message', 'to_id');
+        return $this->hasMany(Message::class, 'to_id');
     }
 
-    public function Tag()
+    public function tag()
     {
-        return $this->belongsToMany('App\Tag')->withTimestamps();
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 }
