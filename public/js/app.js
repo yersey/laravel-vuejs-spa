@@ -86549,7 +86549,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _plugins_vuetify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/vuetify */ "./resources/js/plugins/vuetify.js");
 /* harmony import */ var _components_Post__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Post */ "./resources/js/components/Post.vue");
 /* harmony import */ var _components_Comment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Comment */ "./resources/js/components/Comment.vue");
-/* harmony import */ var _components_Entry__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Entry */ "./resources/js/components/Entry.vue");
+/* harmony import */ var _components_Entry__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Entry */ "./resources/js/components/Entry.vue");
 /* harmony import */ var _components_Conversations__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Conversations */ "./resources/js/components/Conversations.vue");
 /* harmony import */ var _components_Conversation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Conversation */ "./resources/js/components/Conversation.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
@@ -86566,7 +86566,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('post', _components_Post__WEBPACK_IMPORTED_MODULE_5__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('comment', _components_Comment__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('entry', _components_Entry__WEBPACK_IMPORTED_MODULE_10__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('entry', _components_Entry__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('conversations', _components_Conversations__WEBPACK_IMPORTED_MODULE_8__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('conversation', _components_Conversation__WEBPACK_IMPORTED_MODULE_9__["default"]);
 axios.interceptors.response.use(function (response) {
@@ -88177,17 +88177,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Two__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Two */ "./resources/js/components/Two.vue");
 /* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Login */ "./resources/js/components/Login.vue");
 /* harmony import */ var _components_Register__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Register */ "./resources/js/components/Register.vue");
-/* harmony import */ var _components_Entries__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Entries */ "./resources/js/components/Entries.vue");
-/* harmony import */ var _components_Entry_show__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Entry_show */ "./resources/js/components/Entry_show.vue");
-/* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Posts */ "./resources/js/components/Posts.vue");
-/* harmony import */ var _components_Post_show__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Post_show */ "./resources/js/components/Post_show.vue");
-/* harmony import */ var _components_Not_found__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Not_found */ "./resources/js/components/Not_found.vue");
-/* harmony import */ var _components_Notifications__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Notifications */ "./resources/js/components/Notifications.vue");
-/* harmony import */ var _components_Messages__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Messages */ "./resources/js/components/Messages.vue");
-/* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Profile */ "./resources/js/components/Profile.vue");
-/* harmony import */ var _components_Tag__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Tag */ "./resources/js/components/Tag.vue");
-/* harmony import */ var _components_Tags__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Tags */ "./resources/js/components/Tags.vue");
-/* harmony import */ var _components_Settings__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Settings */ "./resources/js/components/Settings.vue");
+/* harmony import */ var _components_Entries__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Entries */ "./resources/js/components/Entries.vue");
+/* harmony import */ var _components_Entry_show__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Entry_show */ "./resources/js/components/Entry_show.vue");
+/* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Posts */ "./resources/js/components/Posts.vue");
+/* harmony import */ var _components_Post_show__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Post_show */ "./resources/js/components/Post_show.vue");
+/* harmony import */ var _components_Not_found__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Not_found */ "./resources/js/components/Not_found.vue");
+/* harmony import */ var _components_Notifications__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Notifications */ "./resources/js/components/Notifications.vue");
+/* harmony import */ var _components_Messages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Messages */ "./resources/js/components/Messages.vue");
+/* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Profile */ "./resources/js/components/Profile.vue");
+/* harmony import */ var _components_Tag__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Tag */ "./resources/js/components/Tag.vue");
+/* harmony import */ var _components_Tags__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Tags */ "./resources/js/components/Tags.vue");
+/* harmony import */ var _components_Settings__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Settings */ "./resources/js/components/Settings.vue");
 
 
 
@@ -88211,7 +88211,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '*',
     name: 'Not_found',
-    component: _components_Not_found__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _components_Not_found__WEBPACK_IMPORTED_MODULE_10__["default"]
   }, {
     path: '/main',
     name: 'Main',
@@ -88219,7 +88219,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   }, {
     path: '/',
     name: 'Posts',
-    component: _components_Posts__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_Posts__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
     path: '/two',
     name: 'Two',
@@ -88235,39 +88235,39 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   }, {
     path: '/mirko',
     name: 'Entries',
-    component: _components_Entries__WEBPACK_IMPORTED_MODULE_17__["default"]
+    component: _components_Entries__WEBPACK_IMPORTED_MODULE_6__["default"]
   }, {
     path: '/mirko/:id',
     name: 'Entry_show',
-    component: _components_Entry_show__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _components_Entry_show__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: '/post/:id',
     name: 'Post_show',
-    component: _components_Post_show__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_Post_show__WEBPACK_IMPORTED_MODULE_9__["default"]
   }, {
     path: '/notifications',
     name: 'Notifications',
-    component: _components_Notifications__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _components_Notifications__WEBPACK_IMPORTED_MODULE_11__["default"]
   }, {
     path: '/messages/:conversation?',
     name: 'Messages',
-    component: _components_Messages__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_Messages__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
     path: '/user/:id',
     name: 'Profile',
-    component: _components_Profile__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _components_Profile__WEBPACK_IMPORTED_MODULE_13__["default"]
   }, {
     path: '/tags',
     name: 'Tags',
-    component: _components_Tags__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _components_Tags__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
     path: '/tag/:name',
     name: 'Tag',
-    component: _components_Tag__WEBPACK_IMPORTED_MODULE_13__["default"]
+    component: _components_Tag__WEBPACK_IMPORTED_MODULE_14__["default"]
   }, {
     path: '/settings',
     name: 'Settings',
-    component: _components_Settings__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _components_Settings__WEBPACK_IMPORTED_MODULE_16__["default"]
   }]
 }));
 
