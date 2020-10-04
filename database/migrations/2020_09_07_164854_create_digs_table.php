@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWykopsTable extends Migration
+class CreateDigsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWykopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wykops', function (Blueprint $table) {
+        Schema::create('digs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id');
             $table->foreignId('user_id');
@@ -28,6 +28,6 @@ class CreateWykopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wykops');
+        Schema::dropIfExists('digs');
     }
 }

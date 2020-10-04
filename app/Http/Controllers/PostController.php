@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Post;
-use App\Wykop;
+use App\Dig;
 use App\Tag;
 use App\Http\Resources\PostResource;
 use App\Notifications\TagUse;
@@ -116,21 +116,21 @@ class PostController extends Controller
         return response()->json(['message' => 'Post został pomyślnie usunięty', 'id' => $id]);
     }
 
-    public function wykop($id){
+    public function Dig($id){
         $post = Post::findOrFail($id);
 
-        if(!$post->isWykop() && $post->user->id != auth()->user()->id){
-            $post->wykop()->save(new Wykop());
+        if(!$post->isDig() && $post->user->id != auth()->user()->id){
+            $post->dig()->save(new Dig());
         }else{
             return response()->json('error', 400);
         }
     }
 
-    public function unWykop($id){
+    public function unDig($id){
         $post = Post::findOrFail($id);
 
-        if($post->isWykop()){
-            $post->wykop()->where('user_id', auth()->user()->id)->delete();
+        if($post->isDig()){
+            $post->dig()->where('user_id', auth()->user()->id)->delete();
         }
     }
 }

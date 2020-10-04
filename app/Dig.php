@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Wykop extends Model
+class Dig extends Model
 {
     protected static function boot()
     {

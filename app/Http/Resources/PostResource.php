@@ -25,9 +25,9 @@ class PostResource extends JsonResource
             'user_avatar' => $this->user->avatar,
             'created_at' => $this->created_at,
             'created_at_' => $this->created_at_(),
-            'wykops' => $this->wykop()->count(),
+            'digs' => $this->dig()->count(),
             'tag' => $this->tag,
-            'isWykop' => auth()->user() ? $this->isWykop() : false,
+            'isDig' => auth()->user() ? $this->isDig() : false,
             'comments' => CommentResource::collection($this->comment),
         ];
     }

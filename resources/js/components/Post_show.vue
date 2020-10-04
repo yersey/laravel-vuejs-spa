@@ -36,8 +36,8 @@
                         user_id: null, 
                         user_name: null, 
                         created_at_: null, 
-                        wykops: null, 
-                        isWykop: null, 
+                        digs: null, 
+                        isDig: null, 
                         comments: []
                     },
                 comment: {

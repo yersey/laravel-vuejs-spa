@@ -2836,24 +2836,24 @@ __webpack_require__.r(__webpack_exports__);
         _this.post.user_id = response.data.data.user_id;
         _this.post.user_name = response.data.data.user_name;
         _this.post.created_at_ = response.data.data.created_at_;
-        _this.post.wykops = response.data.data.wykops;
-        _this.post.isWykop = response.data.data.isWykop;
+        _this.post.digs = response.data.data.digs;
+        _this.post.isDig = response.data.data.isDig;
         _this.post.comments = response.data.data.comments;
         _this.post.tag = response.data.data.tag;
       });
     },
-    wykop: function wykop(id) {
+    dig: function dig(id) {
       var _this2 = this;
 
-      axios.post("/post/wykop/".concat(id)).then(function (response) {
+      axios.post("/post/dig/".concat(id)).then(function (response) {
         _this2.fetchPost();
       })["catch"](function (error) {//
       });
     },
-    unWykop: function unWykop(id) {
+    unDig: function unDig(id) {
       var _this3 = this;
 
-      axios["delete"]("/post/wykop/".concat(id)).then(function (response) {
+      axios["delete"]("/post/dig/".concat(id)).then(function (response) {
         _this3.fetchPost();
       });
     },
@@ -2940,8 +2940,8 @@ __webpack_require__.r(__webpack_exports__);
         user_id: null,
         user_name: null,
         created_at_: null,
-        wykops: null,
-        isWykop: null,
+        digs: null,
+        isDig: null,
         comments: []
       },
       comment: {
@@ -24190,14 +24190,14 @@ var render = function() {
                     ? _c(
                         "a",
                         [
-                          _vm.post.isWykop
+                          _vm.post.isDig
                             ? _c(
                                 "v-btn",
                                 {
                                   attrs: { small: "", text: "" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.unWykop(_vm.post.id)
+                                      return _vm.unDig(_vm.post.id)
                                     }
                                   }
                                 },
@@ -24210,7 +24210,7 @@ var render = function() {
                                   attrs: { small: "" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.wykop(_vm.post.id)
+                                      return _vm.dig(_vm.post.id)
                                     }
                                   }
                                 },
@@ -24237,9 +24237,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.post.wykops) +
-                          "\n        "
+                        "\n            " + _vm._s(_vm.post.digs) + "\n        "
                       )
                     ]
                   )

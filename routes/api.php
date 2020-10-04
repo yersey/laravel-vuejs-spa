@@ -46,9 +46,9 @@ Route::post('post', 'PostController@store');
 Route::put('post/{id}', 'PostController@update');
 Route::delete('post/{id}', 'PostController@destroy');
 
-//Wykop
-Route::post('post/wykop/{id}', 'PostController@wykop');
-Route::delete('post/wykop/{id}', 'PostController@unWykop');
+//Dig
+Route::post('post/dig/{id}', 'PostController@dig');
+Route::delete('post/dig/{id}', 'PostController@unDig');
 
 //Comment
 Route::get('comment/{id}', 'CommentController@show');

@@ -68,9 +68,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Post');
     }
 
-    public function Wykop()
+    public function Dig()
     {
-        return $this->hasMany('App\Wykop');
+        return $this->hasMany('App\Dig');
     }
     
     public function Wpis()

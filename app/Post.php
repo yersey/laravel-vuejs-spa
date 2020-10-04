@@ -15,14 +15,14 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function Wykop()
+    public function Dig()
     {
-        return $this->hasMany('App\Wykop');
+        return $this->hasMany('App\Dig');
     }
 
-    public function isWykop()
+    public function isDig()
     {   
-        return $this->hasMany('App\Wykop')->where('user_id', auth()->user()->id)->exists();
+        return $this->hasMany('App\Dig')->where('user_id', auth()->user()->id)->exists();
     }
 
     public function Comment()

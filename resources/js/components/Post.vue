@@ -3,11 +3,11 @@
     <v-row class="white elevation-1">
         <v-col cols="2" lg="1" align-self="center" class="text-center"> 
             <a v-if="post.user_id != user.id">
-                <v-btn v-if="post.isWykop" small text @click="unWykop(post.id)">cofnij</v-btn>
-                <v-btn v-else small class="primary" @click="wykop(post.id)">wykop</v-btn>
+                <v-btn v-if="post.isDig" small text @click="unDig(post.id)">cofnij</v-btn>
+                <v-btn v-else small class="primary" @click="dig(post.id)">wykop</v-btn>
             </a>
             <div style="margin-top: 5px; border: 3px solid #1976d2; border-radius: 10px; color: orangered; text-align: center; font-weight: bold; width:65px;" class="mx-auto">
-                {{ post.wykops }}
+                {{ post.digs }}
             </div>
         </v-col>
         <v-col cols="10" md="4" lg="3" class="pl-7 pl-sm-5 pl-sm-0">
@@ -82,14 +82,14 @@
                     this.post.user_id = response.data.data.user_id;
                     this.post.user_name = response.data.data.user_name;
                     this.post.created_at_ = response.data.data.created_at_;
-                    this.post.wykops = response.data.data.wykops;
-                    this.post.isWykop = response.data.data.isWykop;
+                    this.post.digs = response.data.data.digs;
+                    this.post.isDig = response.data.data.isDig;
                     this.post.comments = response.data.data.comments;
                     this.post.tag = response.data.data.tag;
                 });
             },
-            wykop: function(id) {
-                axios.post(`/post/wykop/${id}`)
+            dig: function(id) {
+                axios.post(`/post/dig/${id}`)
                 .then(response => {
                     this.fetchPost();
                 })
@@ -97,8 +97,8 @@
                     //
                 });
             },
-            unWykop: function(id) {
-                axios.delete(`/post/wykop/${id}`)
+            unDig: function(id) {
+                axios.delete(`/post/dig/${id}`)
                 .then(response => {
                     this.fetchPost();
                 });
