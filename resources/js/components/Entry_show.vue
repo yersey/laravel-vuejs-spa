@@ -1,11 +1,11 @@
 <template>
     <div>
-        <wpis @odpowiedz="odpowiedz($event)" @daniel="wypisz($event)" class="mt-2" :wpis="wpis"></wpis>
+        <entry @odpowiedz="odpowiedz($event)" @daniel="wypisz($event)" class="mt-2" :entry="entry"></entry>
 
         <v-row class="white">
             <v-col cols="1"></v-col>
             <v-col>
-                <comment v-for="comment in wpis.comments" :key="comment.id" :comment="comment"></comment>
+                <comment v-for="comment in entry.comments" :key="comment.id" :comment="comment"></comment>
                 <v-row class="white" v-if="user.id">
                     <v-col cols="2" md="1" class="text-center">
                         <v-avatar size="60"><v-img :src="'storage/'+user.avatar"></v-img></v-avatar>
@@ -26,7 +26,7 @@
         name: 'Post_show',
         data() {
             return {
-                wpis: {
+                entry: {
                         id: null, 
                         body: null, 
                         user_id: null, 
@@ -39,15 +39,15 @@
                 comment: {
                     id: null,
                     body: '',
-                    model: 'wpis'
+                    model: 'entry'
                 }
             }
         },
         methods: {
-            fetchWpis: function() {
+            fetchEntry: function() {
                 axios.get(`/mirko/${this.$route.params.id}`)
                 .then(response => {
-                    this.wpis = response.data.data;
+                    this.entry = response.data.data;
                     this.comment.id = response.data.data.id;
                 })
                 .catch(error => {
@@ -59,12 +59,12 @@
             addComment: function() {
                 axios.post('/comment', this.comment)
                 .then(response => {
-                    this.fetchWpis();
+                    this.fetchEntry();
                     this.comment.body = null;
                 });
             },
-            odpowiedz: function(wpis) {
-                this.comment.body += '@'+wpis.user_name+': ';
+            odpowiedz: function(entry) {
+                this.comment.body += '@'+entry.user_name+': ';
             }
         },
         computed: {
@@ -73,11 +73,11 @@
             }
         },
         created() {
-            this.fetchWpis();
+            this.fetchEntry();
         },
         watch: {
             $route(to, from) {
-                this.fetchWpis();
+                this.fetchEntry();
             }
         },
     }

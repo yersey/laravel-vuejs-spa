@@ -9,7 +9,7 @@
         </v-row>
         <div v-for="item in items" :key="item.id" class="mt-2">
             <post v-if="item.imgurl" :post="item"></post>
-            <wpis v-else :wpis="item"></wpis>
+            <entry v-else :entry="item"></entry>
         </div>
     </div>
 </template>

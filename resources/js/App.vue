@@ -4,7 +4,7 @@
       <!-- <center><h2>{{ msg }}</h2></center>
       <router-link :to="{ name: 'Register'}">Register</router-link>
       <router-link :to="{ name: 'Login'}">Login</router-link>
-      <router-link :to="{ name: 'Wpisy'}">Mirko</router-link>
+      <router-link :to="{ name: 'Entries'}">Mirko</router-link>
       <router-link :to="{ name: 'Posts'}">Posty</router-link>
       <button v-if="isLogged" v-on:click="logout" class="btn btn-outline-success my-2 my-sm-0">Wyloguj</button><hr> -->
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Wpis;
+use App\Entry;
 use App\Comment;
 use App\Plus;
 
@@ -18,7 +18,7 @@ class PlusController extends Controller
     public function store(Request $request){
         $rules = [
             'id' => 'required|integer',
-            'model' => 'required|in:wpis,comment'
+            'model' => 'required|in:entry,comment'
         ];
     
         $customMessages = [
@@ -31,11 +31,11 @@ class PlusController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        if($request->model == 'wpis'){
-            $wpis = Wpis::findOrFail($request->id);
+        if($request->model == 'entry'){
+            $entry = Entry::findOrFail($request->id);
 
-            if(!$wpis->isPlus() && $wpis->user->id != auth()->user()->id){
-                $wpis->plus()->save(new Plus());
+            if(!$entry->isPlus() && $entry->user->id != auth()->user()->id){
+                $entry->plus()->save(new Plus());
             }else{
                 return response()->json('Nie można dać plusa', 400);
             }
@@ -54,7 +54,7 @@ class PlusController extends Controller
     {
         $rules = [
             'id' => 'required|integer',
-            'model' => 'required|in:wpis,comment'
+            'model' => 'required|in:entry,comment'
         ];
 
         $validator = Validator::make(['model' => $model, 'id' => $id], $rules);
@@ -63,11 +63,11 @@ class PlusController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        if($model == 'wpis'){
-            $wpis = Wpis::findOrFail($id);
+        if($model == 'entry'){
+            $entry = Entry::findOrFail($id);
 
-            if($wpis->isPlus()){
-                $wpis->plus()->where('user_id', auth()->user()->id)->delete();
+            if($entry->isPlus()){
+                $entry->plus()->where('user_id', auth()->user()->id)->delete();
             }else{
                 return response()->json('Nie można usunąć plusa', 400);
             }

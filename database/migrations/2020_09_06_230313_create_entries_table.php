@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWpisTable extends Migration
+class CreateEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWpisTable extends Migration
      */
     public function up()
     {
-        Schema::create('wpis', function (Blueprint $table) {
+        Schema::create('entries', function (Blueprint $table) {
             $table->id();
             $table->text('body');
             $table->foreignId('user_id');
@@ -28,6 +28,6 @@ class CreateWpisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wpis');
+        Schema::dropIfExists('entries');
     }
 }

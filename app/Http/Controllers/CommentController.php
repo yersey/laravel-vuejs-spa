@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
-use App\Wpis;
+use App\Entry;
 use App\Post;
 use App\Comment;
 use App\Http\Resources\CommentResource;
@@ -42,17 +42,17 @@ class CommentController extends Controller
             if($mentioned){
                 Notification::send($mentioned, new Mentioned('comment', $post->id, 'post'));
             }
-        }else if($request->model == 'wpis'){
-            $wpis = Wpis::findOrFail($request->id);
-            $wpis->comment()->save(new Comment(['body' => filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS)]));
+        }else if($request->model == 'entry'){
+            $entry = Entry::findOrFail($request->id);
+            $entry->comment()->save(new Comment(['body' => filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS)]));
             if($mentioned){
-                Notification::send($mentioned, new Mentioned('comment', $wpis->id, 'wpis'));
+                Notification::send($mentioned, new Mentioned('comment', $entry->id, 'entry'));
             }
         }else{
             $comment = Comment::findOrFail($request->id);
             $comment->comment()->save(new Comment(['body' => filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS)]));
             if($mentioned){
-                Notification::send($mentioned, new Mentioned('comment', $comment->commentable_id, $comment->commentable_type == 'App\Wpis' ? 'wpis' : 'post'));
+                Notification::send($mentioned, new Mentioned('comment', $comment->commentable_id, $comment->commentable_type == 'App\Entry' ? 'entry' : 'post'));
             }
         } 
     }

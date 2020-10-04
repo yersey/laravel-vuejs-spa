@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\WpisRequest;
+use App\Http\Requests\EntryRequest;
 use Illuminate\Support\Facades\Validator;
-use App\Wpis;
+use App\Entry;
 use App\Tag;
-use App\Http\Resources\WpisResource;
+use App\Http\Resources\EntryResource;
 use App\Notifications\Mentioned;
 use App\Notifications\TagUse;
 use Illuminate\Support\Facades\Notification;
@@ -26,8 +26,8 @@ class MirkoController extends Controller
      */
     public function index()
     {
-        $wpisy = Wpis::orderBy('created_at', 'desc')->paginate(15);
-        return WpisResource::collection($wpisy);
+        $entries = Entry::orderBy('created_at', 'desc')->paginate(15);
+        return EntryResource::collection($entries);
     }
 
     /**
@@ -36,12 +36,12 @@ class MirkoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WpisRequest $request)
+    public function store(EntryRequest $request)
     {
-        $wpis = new Wpis();
-        $wpis->body = filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS);
-        $wpis->user_id = auth()->user()->id;
-        $wpis->save();
+        $entry = new Entry();
+        $entry->body = filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS);
+        $entry->user_id = auth()->user()->id;
+        $entry->save();
 
         preg_match_all('/#\w+/', $request->body, $tags);
         if($tags[0]){
@@ -64,12 +64,12 @@ class MirkoController extends Controller
 
                 $tag = Tag::where('name', $tag_)->first();
                 if(!$tag){
-                    $wpis->tag()->save(new Tag(['name' => $tag_]));
+                    $entry->tag()->save(new Tag(['name' => $tag_]));
                 }else {
-                    $wpis->tag()->save($tag);
+                    $entry->tag()->save($tag);
                 } 
                 $users = auth()->user()->whereHas('Tag', function ($query) use ($tag_) {$query->where('name', $tag_);})->get();
-                Notification::send($users, new TagUse('wpis', $wpis->id));
+                Notification::send($users, new TagUse('entry', $entry->id));
             }
         }
 
@@ -81,10 +81,10 @@ class MirkoController extends Controller
             } 
             $mentioned = auth()->user()->whereIn('name', $mention_users)->get();
             //return response($mentioned);
-            Notification::send($mentioned, new Mentioned('wpis', $wpis->id));
+            Notification::send($mentioned, new Mentioned('entry', $entry->id));
         }
 
-        return new WpisResource($wpis);
+        return new EntryResource($entry);
     }
 
     /**
@@ -95,8 +95,8 @@ class MirkoController extends Controller
      */
     public function show($id)
     {
-        $wpis = Wpis::FindOrFail($id);
-        return new WpisResource($wpis);
+        $entry = Entry::FindOrFail($id);
+        return new EntryResource($entry);
     }
 
     /**
@@ -106,19 +106,19 @@ class MirkoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(WpisRequest $request, $id)
+    public function update(EntryRequest $request, $id)
     {
-        $wpis = Wpis::findOrFail($id);
+        $entry = Entry::findOrFail($id);
 
-        if($wpis->user_id != auth()->user()->id){
+        if($entry->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
         
-        $wpis->body = filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS);
-        $wpis->save();
+        $entry->body = filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS);
+        $entry->save();
 
 
-        return new WpisResource($wpis);
+        return new EntryResource($entry);
     }
 
     /**
@@ -129,13 +129,13 @@ class MirkoController extends Controller
      */
     public function destroy($id)
     {
-        $wpis = Wpis::findOrFail($id);
+        $entry = Entry::findOrFail($id);
 
-        if($wpis->user_id != auth()->user()->id){
+        if($entry->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
 
-        $wpis->delete();
+        $entry->delete();
 
         return response()->json(['message' => 'Wpis został pomyślnie usunięty', 'id' => $id]);
     }

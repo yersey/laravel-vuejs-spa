@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
-use App\Wpis;
+use App\Entry;
 use App\Http\Resources\CommentResource;
 
 class TestController extends Controller

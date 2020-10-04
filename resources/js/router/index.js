@@ -4,8 +4,8 @@ import Main from '../components/Main'
 import Two from '../components/Two'
 import Login from '../components/Login'
 import Register from '../components/Register'
-import Wpisy from '../components/Wpisy'
-import Wpis_show from '../components/Wpis_show'
+import Entries from '../components/Entries'
+import Entry_show from '../components/Entry_show'
 import Posts from '../components/Posts'
 import Post_show from '../components/Post_show'
 import Not_found from '../components/Not_found'
@@ -53,13 +53,13 @@ export default new Router({
     },
     {
         path: '/mirko',
-        name: 'Wpisy',
-        component: Wpisy
+        name: 'Entries',
+        component: Entries
     },
     {
         path: '/mirko/:id',
-        name: 'Wpis_show',
-        component: Wpis_show
+        name: 'Entry_show',
+        component: Entry_show
     },
     {
         path: '/post/:id',

@@ -73,7 +73,7 @@ Route::post('message', 'MessageController@store');
 //Route::get('users', 'MessageController@users'); lista userow
 Route::get('user/{name}', 'ProfileController@show');
 Route::get('user/{name}/posts', 'ProfileController@posts');
-Route::get('user/{name}/wpisy', 'ProfileController@wpisy');
+Route::get('user/{name}/entries', 'ProfileController@entries');
 Route::get('user/{name}/tags', 'ProfileController@tags');
 
 //tag

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\PostResource;
-use App\Http\Resources\WpisResource;
+use App\Http\Resources\EntryResource;
 use App\Http\Resources\TagResource;
 
 class ProfileController extends Controller
@@ -27,10 +27,10 @@ class ProfileController extends Controller
         return PostResource::collection($posty);
     }
     
-    public function wpisy($name)
+    public function entries($name)
     {
-        $wpisy = User::where('name', $name)->firstOrFail()->wpis()->paginate(15);
-        return WpisResource::collection($wpisy);
+        $entries = User::where('name', $name)->firstOrFail()->entry()->paginate(15);
+        return EntryResource::collection($entries);
     }
     
     public function tags($name)

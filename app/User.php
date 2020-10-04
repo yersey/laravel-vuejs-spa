@@ -73,9 +73,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Dig');
     }
     
-    public function Wpis()
+    public function Entry()
     {
-        return $this->hasMany('App\Wpis');
+        return $this->hasMany('App\Entry');
     }
     
     public function Comment()

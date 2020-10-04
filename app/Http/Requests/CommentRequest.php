@@ -26,7 +26,7 @@ class CommentRequest extends FormRequest
         return [
             'body' => 'required|min:1|max:1024',
             'id' => 'required|integer',
-            'model' => 'required|in:post,wpis,comment'
+            'model' => 'required|in:post,entry,comment'
         ];
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TagWpis extends Migration
+class EntryTag extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class TagWpis extends Migration
      */
     public function up()
     {
-        Schema::create('tag_wpis', function (Blueprint $table) {
+        Schema::create('entry_tag', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tag_id');
-            $table->foreignId('wpis_id');
+            $table->foreignId('entry_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class TagWpis extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_wpis');
+        Schema::dropIfExists('entry_tag');
     }
 }

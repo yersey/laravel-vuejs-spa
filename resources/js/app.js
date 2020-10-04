@@ -8,13 +8,13 @@ import vuetify from './plugins/vuetify'
 
 import Post from './components/Post'
 import Comment from './components/Comment'
-import Wpis from './components/Wpis'
+import Entry from './components/Entry'
 import Conversations from './components/Conversations'
 import Conversation from './components/Conversation'
 
 Vue.component('post', Post);
 Vue.component('comment', Comment);
-Vue.component('wpis', Wpis);
+Vue.component('entry', Entry);
 Vue.component('conversations', Conversations);
 Vue.component('conversation', Conversation);
 

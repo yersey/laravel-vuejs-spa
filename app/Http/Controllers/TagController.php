@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tag;
-use App\Wpis;
+use App\Entry;
 use App\Post;
 use App\Http\Resources\PostResource;
-use App\Http\Resources\WpisResource;
+use App\Http\Resources\EntryResource;
 use App\Http\Resources\TagResource;
 
 class TagController extends Controller
@@ -27,7 +27,7 @@ class TagController extends Controller
     {
         $tag = Tag::where('name', $name)->firstOrFail();
         
-        $wpisy = WpisResource::collection(Wpis::whereHas('Tag', function ($query) use ($name){
+        $entries = EntryResource::collection(Entry::whereHas('Tag', function ($query) use ($name){
             $query->where('name', $name);
         })->get());
         
@@ -36,7 +36,7 @@ class TagController extends Controller
         })->get());
         
         $itemsUnSorted = $posts;
-        $itemsUnSorted = $itemsUnSorted->merge($wpisy);
+        $itemsUnSorted = $itemsUnSorted->merge($entries);
         $items = $itemsUnSorted->sortByDesc('created_at');
         
         //return response()->json(['data' => $items, 'tag' => ['name' => $name, 'followers' => $tag->user()->count(), 'isFollow' => auth()->user() ? auth()->user()->tag->contains($tag) : false]]);

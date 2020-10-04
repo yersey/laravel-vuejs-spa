@@ -10,9 +10,9 @@ class Tag extends Model
         'name',
     ];
     
-    public function Wpis()
+    public function Entry()
     {
-        return $this->belongsToMany('App\Wpis');
+        return $this->belongsToMany('App\Entry');
     }
     
     public function Post()

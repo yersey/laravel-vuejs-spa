@@ -26,7 +26,7 @@
                 </v-tab>
                 <v-tab>
                     <div>
-                        <div>{{ wpis_count }}</div>
+                        <div>{{ entry_count }}</div>
                         Wpisy
                     </div>
                 </v-tab>
@@ -47,8 +47,8 @@
                         <v-pagination class="mt-3" circle prev-icon="navigate_before" next-icon="navigate_next" v-model="postPagination.current_page" :length="postPagination.last_page" @input="fetchPosts"></v-pagination>
                     </v-tab-item>
                     <v-tab-item>
-                        <wpis v-for="wpis in wpisy" :wpis="wpis" :key="wpis.id"></wpis>
-                        <v-pagination class="mt-3" circle prev-icon="navigate_before" next-icon="navigate_next" v-model="wpisPagination.current_page" :length="wpisPagination.last_page" @input="fetchWpisy"></v-pagination>
+                        <entry v-for="entry in entries" :entry="entry" :key="entry.id"></entry>
+                        <v-pagination class="mt-3" circle prev-icon="navigate_before" next-icon="navigate_next" v-model="entryPagination.current_page" :length="entryPagination.last_page" @input="fetchEntries"></v-pagination>
                     </v-tab-item>
                     <v-tab-item>
                         <p class="text-h5 mb-1">Obserowane tagi</p><hr class="mb-3">
@@ -67,19 +67,19 @@ export default {
             return {
                 profile: {},
                 posts: [],
-                wpisy: [],
+                entries: [],
                 tags: [],
                 tab: null,
                 postPagination: {
                     current_page: 1,
                     last_page: null
                 },
-                wpisPagination: {
+                entryPagination: {
                     current_page: 1,
                     last_page: null
                 },
                 posts_count: null,
-                wpis_count: null,
+                entry_count: null,
             }
         },
         methods: {
@@ -104,14 +104,14 @@ export default {
                     this.postPagination.last_page = response.data.meta.last_page;
                 });
             },
-            fetchWpisy: function() {
-                var page_url = `/user/${this.$route.params.id}/wpisy?page=`+ this.wpisPagination.current_page;
+            fetchEntries: function() {
+                var page_url = `/user/${this.$route.params.id}/entries?page=`+ this.entryPagination.current_page;
                 axios.get(page_url)
                 .then(response => {
-                    this.wpisy = response.data.data;
-                    this.wpis_count = response.data.meta.total;
-                    this.wpisPagination.current_page = response.data.meta.current_page;
-                    this.wpisPagination.last_page = response.data.meta.last_page;
+                    this.entries = response.data.data;
+                    this.entry_count = response.data.meta.total;
+                    this.entryPagination.current_page = response.data.meta.current_page;
+                    this.entryPagination.last_page = response.data.meta.last_page;
                 });
             },
             fetchTags: function() {
@@ -129,14 +129,14 @@ export default {
         created() {
             this.fetchUser();
             this.fetchPosts();
-            this.fetchWpisy();
+            this.fetchEntries();
             this.fetchTags();
         },
         watch: {
             $route(to, from) {
                 this.fetchUser();
                 this.fetchPosts();
-                this.fetchWpisy();
+                this.fetchEntries();
                 this.fetchTags();
             }
         },

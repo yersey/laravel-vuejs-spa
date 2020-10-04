@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Wpis extends Model
+class Entry extends Model
 {
     protected $fillable = [
         'body'
