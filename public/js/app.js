@@ -2094,17 +2094,14 @@ __webpack_require__.r(__webpack_exports__);
     plus: function plus(id) {
       var _this2 = this;
 
-      axios.post('/plus', {
-        id: id,
-        model: 'comment'
-      }).then(function (response) {
+      axios.post("/comment/plus/".concat(id)).then(function (response) {
         _this2.fetchComment();
       });
     },
     unPlus: function unPlus(id) {
       var _this3 = this;
 
-      axios["delete"]("/plus/comment/".concat(id)).then(function (response) {
+      axios["delete"]("/comment/plus/".concat(id)).then(function (response) {
         _this3.fetchComment();
       });
     },
@@ -2460,20 +2457,17 @@ __webpack_require__.r(__webpack_exports__);
         _this.entry.user_avatar = response.data.data.user_avatar;
       });
     },
-    plus: function plus() {
+    plus: function plus(id) {
       var _this2 = this;
 
-      axios.post('/plus', {
-        id: this.entry.id,
-        model: 'entry'
-      }).then(function (response) {
+      axios.post("/entry/plus/".concat(id)).then(function (response) {
         _this2.fetchEntry();
       });
     },
-    unPlus: function unPlus() {
+    unPlus: function unPlus(id) {
       var _this3 = this;
 
-      axios["delete"]("plus/entry/".concat(this.entry.id)).then(function (response) {
+      axios["delete"]("/entry/plus/".concat(id)).then(function (response) {
         _this3.fetchEntry();
       });
     },
@@ -23433,7 +23427,11 @@ var render = function() {
                                       "v-icon",
                                       {
                                         staticClass: "mb-1 green--text",
-                                        on: { click: _vm.unPlus }
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.unPlus(_vm.entry.id)
+                                          }
+                                        }
                                       },
                                       [_vm._v("add_box")]
                                     )
@@ -23441,7 +23439,11 @@ var render = function() {
                                       "v-icon",
                                       {
                                         staticClass: "mb-1 green--text",
-                                        on: { click: _vm.plus }
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.plus(_vm.entry.id)
+                                          }
+                                        }
                                       },
                                       [_vm._v("add")]
                                     )

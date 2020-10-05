@@ -120,14 +120,14 @@
                 });
             },
             plus: function(id) {
-                axios.post('/plus', {id: id, model: 'comment'})
+                axios.post(`/comment/plus/${id}`)
                 .then(response => {
                     this.fetchComment();
                 });
                 
             },
             unPlus: function(id) {
-                axios.delete(`/plus/comment/${id}`)
+                axios.delete(`/comment/plus/${id}`)
                 .then(response => {
                     this.fetchComment();
                 });

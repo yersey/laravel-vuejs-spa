@@ -18,10 +18,10 @@ class TagController extends Controller
         return response()->json(TagResource::collection($tags));
     }
 
-    public function show($name)
+    public function show(Tag $tag)
     {
-        $tag = Tag::where('name', $name)->firstOrFail();
-        
+        $name = $tag->name;
+
         $entries = EntryResource::collection(Entry::whereHas('Tag', function ($query) use ($name){
             $query->where('name', $name);
         })->get());
@@ -34,18 +34,16 @@ class TagController extends Controller
         $itemsUnSorted = $itemsUnSorted->merge($entries);
         $items = $itemsUnSorted->sortByDesc('created_at');
         
-        //return response()->json(['data' => $items, 'tag' => ['name' => $name, 'followers' => $tag->user()->count(), 'isFollow' => auth()->user() ? auth()->user()->tag->contains($tag) : false]]);
         return response()->json(['data' => $items, 'tag' => new TagResource($tag)]);
     }
     
-    public function follow($name){    
-        $tag = Tag::where('name', $name)->firstOrFail();
-        if(!auth()->user()->tag->contains($tag))
-            auth()->user()->tag()->attach($tag);  
+    public function follow(Tag $tag){    
+        if(!auth()->user()->tag->contains($tag)){
+            auth()->user()->tag()->attach($tag);
+        }
     }  
     
-    public function unfollow($name){  
-        $tag = Tag::where('name', $name)->firstOrFail();
+    public function unfollow(Tag $tag){  
         $tag->user()->detach(auth()->user()->id);
     }
 }

@@ -15,8 +15,8 @@
                 <div class="float-right green--text">
                     {{ entry.pluses }}
                     <a v-if="entry.user_id != user.id && user.id">
-                        <v-icon v-if="entry.isPlus" @click="unPlus" class="mb-1 green--text">add_box</v-icon>
-                        <v-icon v-else @click="plus" class="mb-1 green--text">add</v-icon>
+                        <v-icon v-if="entry.isPlus" @click="unPlus(entry.id)" class="mb-1 green--text">add_box</v-icon>
+                        <v-icon v-else @click="plus(entry.id)" class="mb-1 green--text">add</v-icon>
                     </a> 
                 </div>
                 <hr class="mb-1">
@@ -63,15 +63,15 @@
                     this.entry.user_avatar = response.data.data.user_avatar;
                 });
             },
-            plus: function() {
-                axios.post('/plus', {id: this.entry.id, model: 'entry'})
+            plus: function(id) {
+                axios.post(`/entry/plus/${id}`)
                 .then(response => {
                     this.fetchEntry();
                 });
                 
             },
-            unPlus: function() {
-                axios.delete(`plus/entry/${this.entry.id}`)
+            unPlus: function(id) {
+                axios.delete(`/entry/plus/${id}`)
                 .then(response => {
                     this.fetchEntry();
                 });

@@ -63,9 +63,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::FindOrFail($id);
         return new PostResource($post);
     }
 
@@ -76,10 +75,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, $id)
+    public function update(PostRequest $request, Post $post)
     {
-        $post = Post::findOrFail($id);
-
         if($post->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
@@ -98,22 +95,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
-
         if($post->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
 
         $post->delete();
 
-        return response()->json(['message' => 'Post został pomyślnie usunięty', 'id' => $id]);
+        return response()->json(['message' => 'Post został pomyślnie usunięty']);
     }
 
-    public function Dig($id){
-        $post = Post::findOrFail($id);
-
+    public function Dig(Post $post)
+    {
         if(!$post->isDig() && $post->user->id != auth()->user()->id){
             $post->dig()->save(new Dig());
         }else{
@@ -121,9 +115,8 @@ class PostController extends Controller
         }
     }
 
-    public function unDig($id){
-        $post = Post::findOrFail($id);
-
+    public function unDig(Post $post)
+    {
         if($post->isDig()){
             $post->dig()->where('user_id', auth()->user()->id)->delete();
         }

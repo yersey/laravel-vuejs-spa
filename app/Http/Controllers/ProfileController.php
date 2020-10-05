@@ -11,28 +11,27 @@ use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
-    public function show($name)
+    public function show(User $user)
     {
-        $user = User::where('name', $name)->firstOrFail();
         $user['when'] = (new Carbon($user->created_at))->locale('pl')->diffForHumans(null, \Carbon\CarbonInterface::DIFF_ABSOLUTE);
         return response()->json($user);
     }
     
-    public function posts($name)
+    public function posts(User $user)
     {
-        $posty = User::where('name', $name)->firstOrFail()->post()->paginate(15);
+        $posty = $user->post()->paginate(15);
         return PostResource::collection($posty);
     }
     
-    public function entries($name)
+    public function entries(User $user)
     {
-        $entries = User::where('name', $name)->firstOrFail()->entry()->paginate(15);
+        $entries = $user->entry()->paginate(15);
         return EntryResource::collection($entries);
     }
     
-    public function tags($name)
+    public function tags(User $user)
     {
-        $tags = User::where('name', $name)->firstOrFail()->tag;
+        $tags = $user->tag;
         return TagResource::collection($tags);
     }
 }

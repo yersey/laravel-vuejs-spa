@@ -63,6 +63,11 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
     public function post()
     {
         return $this->hasMany(Post::class);

@@ -34,31 +34,33 @@ Route::post('test', 'TestController@index');
 
 //Mirko
 Route::get('mirko', 'MirkoController@index');
-Route::get('mirko/{id}', 'MirkoController@show');
+Route::get('mirko/{entry}', 'MirkoController@show');
 Route::post('mirko', 'MirkoController@store')->middleware('jwt.auth');
-Route::put('mirko/{id}', 'MirkoController@update')->middleware('jwt.auth');
-Route::delete('mirko/{id}', 'MirkoController@destroy')->middleware('jwt.auth');
+Route::put('mirko/{entry}', 'MirkoController@update')->middleware('jwt.auth');
+Route::delete('mirko/{entry}', 'MirkoController@destroy')->middleware('jwt.auth');
 
 //Post
 Route::get('post', 'PostController@index');
-Route::get('post/{id}', 'PostController@show');
+Route::get('post/{post}', 'PostController@show');
 Route::post('post', 'PostController@store')->middleware('jwt.auth');
-Route::put('post/{id}', 'PostController@update')->middleware('jwt.auth');
-Route::delete('post/{id}', 'PostController@destroy')->middleware('jwt.auth');
+Route::put('post/{post}', 'PostController@update')->middleware('jwt.auth');
+Route::delete('post/{post}', 'PostController@destroy')->middleware('jwt.auth');
 
 //Dig
-Route::post('post/dig/{id}', 'PostController@dig')->middleware('jwt.auth');
-Route::delete('post/dig/{id}', 'PostController@unDig')->middleware('jwt.auth');
+Route::post('post/dig/{post}', 'PostController@dig')->middleware('jwt.auth');
+Route::delete('post/dig/{post}', 'PostController@unDig')->middleware('jwt.auth');
 
 //Comment
-Route::get('comment/{id}', 'CommentController@show');
+Route::get('comment/{comment}', 'CommentController@show');
 Route::post('comment', 'CommentController@store')->middleware('jwt.auth');
-Route::put('comment/{id}', 'CommentController@update')->middleware('jwt.auth');
-Route::delete('comment/{id}', 'CommentController@destroy')->middleware('jwt.auth');
+Route::put('comment/{comment}', 'CommentController@update')->middleware('jwt.auth');
+Route::delete('comment/{comment}', 'CommentController@destroy')->middleware('jwt.auth');
 
-//Plus
-Route::post('plus', 'PlusController@store')->middleware('jwt.auth');
-Route::delete('plus/{model}/{id}', 'PlusController@destroy')->middleware('jwt.auth');
+//plus
+Route::post('entry/plus/{entry}', 'MirkoController@plus')->middleware('jwt.auth');
+Route::delete('entry/plus/{entry}', 'MirkoController@unPlus')->middleware('jwt.auth');
+Route::post('comment/plus/{comment}', 'CommentController@plus')->middleware('jwt.auth');
+Route::delete('comment/plus/{comment}', 'CommentController@unPlus')->middleware('jwt.auth');
 
 //notifications
 Route::get('notifications', 'UserController@notifications')->middleware('jwt.auth');
@@ -70,16 +72,16 @@ Route::get('conversation/{conversation_id?}', 'MessageController@conversation')-
 Route::post('message', 'MessageController@store')->middleware('jwt.auth');
 
 //profile
-Route::get('user/{name}', 'ProfileController@show');
-Route::get('user/{name}/posts', 'ProfileController@posts');
-Route::get('user/{name}/entries', 'ProfileController@entries');
-Route::get('user/{name}/tags', 'ProfileController@tags');
+Route::get('user/{user}', 'ProfileController@show');
+Route::get('user/{user}/posts', 'ProfileController@posts');
+Route::get('user/{user}/entries', 'ProfileController@entries');
+Route::get('user/{user}/tags', 'ProfileController@tags');
 
 //tag
 Route::get('tags', 'TagController@index');
-Route::get('tag/{name}', 'TagController@show');
-Route::post('tag/{name}/follow', 'TagController@follow')->middleware('jwt.auth');
-Route::delete('tag/{name}/unfollow', 'TagController@unfollow')->middleware('jwt.auth');
+Route::get('tag/{tag}', 'TagController@show');
+Route::post('tag/{tag}/follow', 'TagController@follow')->middleware('jwt.auth');
+Route::delete('tag/{tag}/unfollow', 'TagController@unfollow')->middleware('jwt.auth');
 
 //settings
 Route::post('settings/avatar', 'SettingsController@uploadAvatar')->middleware('jwt.auth');

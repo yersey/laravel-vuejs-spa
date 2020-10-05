@@ -23,11 +23,16 @@ class CommentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'body' => 'required|min:1|max:1024',
             'id' => 'required|integer',
-            'model' => 'required|in:post,entry,comment'
         ];
+
+        if ($this->getMethod() == 'POST') {
+            $rules += ['model' => 'required|in:post,entry,comment'];
+        }
+    
+        return $rules;
     }
 
     public function messages()

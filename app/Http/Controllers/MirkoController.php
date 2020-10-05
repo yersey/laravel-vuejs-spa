@@ -7,6 +7,7 @@ use App\Http\Requests\EntryRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Entry;
 use App\Tag;
+use App\Plus;
 use App\Http\Resources\EntryResource;
 use App\Notifications\Mentioned;
 use App\Notifications\TagUse;
@@ -88,9 +89,8 @@ class MirkoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Entry $entry)
     {
-        $entry = Entry::FindOrFail($id);
         return new EntryResource($entry);
     }
 
@@ -101,10 +101,8 @@ class MirkoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EntryRequest $request, $id)
+    public function update(EntryRequest $request, Entry $entry)
     {
-        $entry = Entry::findOrFail($id);
-
         if($entry->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
@@ -122,16 +120,32 @@ class MirkoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Entry $entry)
     {
-        $entry = Entry::findOrFail($id);
-
         if($entry->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
 
         $entry->delete();
 
-        return response()->json(['message' => 'Wpis został pomyślnie usunięty', 'id' => $id]);
+        return response()->json(['message' => 'Wpis został pomyślnie usunięty']);
+    }
+
+    public function plus(Entry $entry)
+    {
+        if(!$entry->isPlus() && $entry->user->id != auth()->user()->id){
+            $entry->plus()->save(new Plus());
+        }else{
+            return response()->json('Nie można dać plusa', 400);
+        }
+    }
+
+    public function unPlus(Entry $entry)
+    {
+        if($entry->isPlus()){
+            $entry->plus()->where('user_id', auth()->user()->id)->delete();
+        }else{
+            return response()->json('Nie można usunąć plusa', 400);
+        }
     }
 }

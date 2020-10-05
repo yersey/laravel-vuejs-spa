@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
 use App\Entry;
 use App\Post;
 use App\Comment;
+use App\plus;
 use App\Http\Resources\CommentResource;
 use App\Notifications\Mentioned;
 use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
-    public function show($id)
+    public function show(Comment $comment)
     {
-        $comment = Comment::FindOrFail($id);
         return new CommentResource($comment);
     }
 
@@ -52,10 +51,8 @@ class CommentController extends Controller
         } 
     }
 
-    public function update($id, UpdateCommentRequest $request)
+    public function update(Comment $comment, CommentRequest $request)
     {
-        $comment = Comment::findOrFail($id);
-
         if($comment->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
@@ -66,16 +63,32 @@ class CommentController extends Controller
         return new CommentResource($comment);
     }
 
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        $comment = Comment::findOrFail($id);
-
         if($comment->user_id != auth()->user()->id){
             return response()->json('Forbidden.', 403);
         }
 
         $comment->delete();
 
-        return response()->json(['message' => 'Komentarz został pomyślnie usunięty', 'id' => $id]);
+        return response()->json(['message' => 'Komentarz został pomyślnie usunięty']);
+    }
+
+    public function plus(Comment $comment)
+    {
+        if(!$comment->isPlus() && $comment->user->id != auth()->user()->id){
+            $comment->plus()->save(new Plus());
+        }else{
+            return response()->json('Nie można dać plusa', 400);
+        }
+    }
+
+    public function unPlus(Comment $comment)
+    {
+        if($comment->isPlus()){
+            $comment->plus()->where('user_id', auth()->user()->id)->delete();
+        }else{
+            return response()->json('Nie można usunąć plusa', 400);
+        }
     }
 }
