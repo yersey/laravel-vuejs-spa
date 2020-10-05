@@ -25,7 +25,6 @@ class CommentRequest extends FormRequest
     {
         $rules = [
             'body' => 'required|min:1|max:1024',
-            'id' => 'required|integer',
         ];
 
         if ($this->getMethod() == 'POST') {

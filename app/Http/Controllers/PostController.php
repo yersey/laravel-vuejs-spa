@@ -77,9 +77,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        if($post->user_id != auth()->user()->id){
-            return response()->json('Forbidden.', 403);
-        }
+        $this->authorize('update', $post);
         
         $post->title = $request->title;
         $post->body = $request->body;
@@ -97,28 +95,22 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->user_id != auth()->user()->id){
-            return response()->json('Forbidden.', 403);
-        }
+        $this->authorize('delete', $post);
 
         $post->delete();
-
-        return response()->json(['message' => 'Post został pomyślnie usunięty']);
     }
 
     public function Dig(Post $post)
     {
-        if(!$post->isDig() && $post->user->id != auth()->user()->id){
-            $post->dig()->save(new Dig());
-        }else{
-            return response()->json('error', 400);
-        }
+        $this->authorize('dig', $post);
+
+        $post->dig()->save(new Dig());
     }
 
     public function unDig(Post $post)
     {
-        if($post->isDig()){
-            $post->dig()->where('user_id', auth()->user()->id)->delete();
-        }
+        $this->authorize('unDig', $post);
+
+        $post->dig()->where('user_id', auth()->user()->id)->delete();
     }
 }

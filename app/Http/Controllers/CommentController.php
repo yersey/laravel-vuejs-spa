@@ -53,9 +53,7 @@ class CommentController extends Controller
 
     public function update(Comment $comment, CommentRequest $request)
     {
-        if($comment->user_id != auth()->user()->id){
-            return response()->json('Forbidden.', 403);
-        }
+        $this->authorize('update', $comment);
 
         $comment->body = filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS);
         $comment->save();
@@ -65,30 +63,21 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
-        if($comment->user_id != auth()->user()->id){
-            return response()->json('Forbidden.', 403);
-        }
+        $this->authorize('delete', $comment);
 
         $comment->delete();
-
-        return response()->json(['message' => 'Komentarz został pomyślnie usunięty']);
     }
 
     public function plus(Comment $comment)
     {
-        if(!$comment->isPlus() && $comment->user->id != auth()->user()->id){
-            $comment->plus()->save(new Plus());
-        }else{
-            return response()->json('Nie można dać plusa', 400);
-        }
+        $this->authorize('plus', $comment);
+
+        $comment->plus()->save(new Plus());
     }
 
     public function unPlus(Comment $comment)
     {
-        if($comment->isPlus()){
-            $comment->plus()->where('user_id', auth()->user()->id)->delete();
-        }else{
-            return response()->json('Nie można usunąć plusa', 400);
-        }
+        $this->authorize('unPlus', $comment);
+        $comment->plus()->where('user_id', auth()->user()->id)->delete();
     }
 }
