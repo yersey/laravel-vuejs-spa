@@ -7,27 +7,40 @@ use App\Http\Requests\CommentRequest;
 use App\Entry;
 use App\Post;
 use App\Comment;
-use App\plus;
+use App\Plus;
 use App\Http\Resources\CommentResource;
 use App\Notifications\Mentioned;
 use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
+    /**
+     * Return the specified Comment.
+     *
+     * @param Comment $comment
+     * @return CommentResource
+     */
     public function show(Comment $comment)
     {
         return new CommentResource($comment);
     }
 
+    /**
+     * Store a newly created comment.
+     *
+     * @param CommentRequest $request
+     * @return void
+     */
     public function store(CommentRequest $request){
         preg_match_all('/@\w+/', $request->body, $raw_users);
         $mentioned = null;
         if($raw_users[0]){
             $raw_users = array_unique($raw_users[0]);
+            $mention_users = [];
             foreach($raw_users as $mention_user){
                 $mention_users[] = substr($mention_user, 1);
             } 
-            $mentioned = auth()->user()->whereIn('name', $mention_users)->get();
+            $mentioned = auth()->user()->whereIn('name', $mention_users)->get();  
         }
 
         if($request->model == 'post'){
@@ -51,6 +64,13 @@ class CommentController extends Controller
         } 
     }
 
+    /**
+     * Update the specified comment.
+     *
+     * @param Comment $comment
+     * @param CommentRequest $request
+     * @return CommentResource
+     */
     public function update(Comment $comment, CommentRequest $request)
     {
         $this->authorize('update', $comment);
@@ -61,6 +81,12 @@ class CommentController extends Controller
         return new CommentResource($comment);
     }
 
+    /**
+     * Remove the specified comment.
+     *
+     * @param Comment $comment
+     * @return void
+     */
     public function destroy(Comment $comment)
     {
         $this->authorize('delete', $comment);
@@ -68,6 +94,12 @@ class CommentController extends Controller
         $comment->delete();
     }
 
+    /**
+     * Plus the specified Comment.
+     *
+     * @param Comment $comment
+     * @return void
+     */
     public function plus(Comment $comment)
     {
         $this->authorize('plus', $comment);
@@ -75,6 +107,12 @@ class CommentController extends Controller
         $comment->plus()->save(new Plus());
     }
 
+    /**
+     * Unplus the specified comment.
+     *
+     * @param Comment $comment
+     * @return void
+     */
     public function unPlus(Comment $comment)
     {
         $this->authorize('unPlus', $comment);

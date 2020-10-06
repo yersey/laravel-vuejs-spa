@@ -11,12 +11,15 @@ class TagUse extends Notification
 {
     use Queueable;
 
+    protected $from_model, $from_model_id;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param string $from_model
+     * @param integer $from_model_id
      */
-    public function __construct($from_model, $from_model_id)
+    public function __construct(string $from_model, int $from_model_id)
     {
         $this->from_model = $from_model;
         $this->from_model_id = $from_model_id;

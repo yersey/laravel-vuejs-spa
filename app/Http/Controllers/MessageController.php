@@ -10,6 +10,12 @@ use App\Http\Resources\MessageResource;
 
 class MessageController extends Controller
 {
+    /**
+     * Store a newly created message.
+     *
+     * @param MessageRequest $request
+     * @return void
+     */
     public function store(MessageRequest $request)
     {
         $user = User::where('name', $request->to_id)->firstOrFail();
@@ -29,6 +35,11 @@ class MessageController extends Controller
         $message->save();
     }
 
+    /**
+     * Return a list of conversations.
+     *
+     * @return mixed
+     */
     public function conversations()
     {
         $conversations = Message::where('to_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()->unique('conversation');
@@ -36,7 +47,13 @@ class MessageController extends Controller
         return MessageResource::collection($conversations);
     }
 
-    public function conversation($conversation_id = null)
+    /**
+     * Return the specified conversation.
+     *
+     * @param string $conversation_id
+     * @return mixed
+     */
+    public function conversation(string $conversation_id = null)
     {
         $me = auth()->user();
 
@@ -62,6 +79,5 @@ class MessageController extends Controller
             
         }
 		return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)[0]]);
-        
     }
 }

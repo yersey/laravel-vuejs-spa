@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Notification;
 class MirkoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Return the list of entries.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index()
     {
@@ -27,10 +27,10 @@ class MirkoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created entry.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param EntryRequest $request
+     * @return mixed
      */
     public function store(EntryRequest $request)
     {
@@ -72,11 +72,11 @@ class MirkoController extends Controller
         preg_match_all('/@\w+/', $request->body, $raw_users);
         if($raw_users[0]){
             $raw_users = array_unique($raw_users[0]);
+            $mention_users = [];
             foreach($raw_users as $mention_user){
                 $mention_users[] = substr($mention_user, 1);
             } 
             $mentioned = auth()->user()->whereIn('name', $mention_users)->get();
-            //return response($mentioned);
             Notification::send($mentioned, new Mentioned('entry', $entry->id));
         }
 
@@ -84,10 +84,10 @@ class MirkoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Return the specified entry.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Entry $entry
+     * @return EntryResource
      */
     public function show(Entry $entry)
     {
@@ -95,11 +95,11 @@ class MirkoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified entry.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param EntryRequest $request
+     * @param Entry $entry
+     * @return EntryResource
      */
     public function update(EntryRequest $request, Entry $entry)
     {
@@ -112,10 +112,10 @@ class MirkoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified entry.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Entry $entry
+     * @return void
      */
     public function destroy(Entry $entry)
     {
@@ -124,6 +124,12 @@ class MirkoController extends Controller
         $entry->delete();
     }
 
+    /**
+     * Plus the specified entry.
+     *
+     * @param Entry $entry
+     * @return void
+     */
     public function plus(Entry $entry)
     {
         $this->authorize('plus', $entry);
@@ -131,6 +137,12 @@ class MirkoController extends Controller
         $entry->plus()->save(new Plus());
     }
 
+    /**
+     * Unplus the specified entry.
+     *
+     * @param Entry $entry
+     * @return void
+     */
     public function unPlus(Entry $entry)
     {
         $this->authorize('unPlus', $entry);

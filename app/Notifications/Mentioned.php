@@ -11,12 +11,16 @@ class Mentioned extends Notification
 {
     use Queueable;
 
+    protected $from_model, $from_model_id, $comment_parent;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param string $from_model
+     * @param integer $from_model_id
+     * @param string $comment_parent
      */
-    public function __construct($from_model, $from_model_id, $comment_parent = null)
+    public function __construct(string $from_model, int $from_model_id, string $comment_parent = null)
     {
         $this->from_model = $from_model;
         $this->from_model_id = $from_model_id;

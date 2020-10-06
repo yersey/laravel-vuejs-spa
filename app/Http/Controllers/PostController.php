@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Notification;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Return a list of posts.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index()
     {
@@ -25,10 +25,10 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Post
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PostRequest $request
+     * @return PostResource
      */
     public function store(PostRequest $request)
     {
@@ -58,10 +58,10 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Return the specified post.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Post $post
+     * @return PostResource
      */
     public function show(Post $post)
     {
@@ -69,11 +69,11 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified post.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param PostRequest $request
+     * @param Post $post
+     * @return PostResource
      */
     public function update(PostRequest $request, Post $post)
     {
@@ -88,10 +88,10 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified post
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return void
      */
     public function destroy(Post $post)
     {
@@ -100,6 +100,12 @@ class PostController extends Controller
         $post->delete();
     }
 
+    /**
+     * Dig the specified post
+     *
+     * @param Post $post
+     * @return void
+     */
     public function Dig(Post $post)
     {
         $this->authorize('dig', $post);
@@ -107,6 +113,12 @@ class PostController extends Controller
         $post->dig()->save(new Dig());
     }
 
+    /**
+     * Undig the specified post
+     *
+     * @param Post $post
+     * @return void
+     */
     public function unDig(Post $post)
     {
         $this->authorize('unDig', $post);
