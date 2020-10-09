@@ -27,7 +27,7 @@ class PostRequest extends FormRequest
             'title' => 'required|max:70|min:2',
             'body' => 'required|min:5|max:256',
             'imgurl' => 'required|url',
-            'tags' => 'nullable|regex:/^[\pL\s]+$/u',
+            // 'tags' => 'nullable|regex:/^[\pL\s]+$/u',
         ];
     }
 

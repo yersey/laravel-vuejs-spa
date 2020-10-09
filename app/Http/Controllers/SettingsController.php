@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\AvatarRequest;
+use App\Services\SettingsService;
 
 
 class SettingsController extends Controller
@@ -16,7 +16,6 @@ class SettingsController extends Controller
      */
     public function uploadAvatar(AvatarRequest $request)
     {
-        $name = $request->file('avatar')->store('avatars', 'public');
-        auth()->user()->update(['avatar' => $name]);
+        SettingsService::uploadAvatar($request);
     }
 }

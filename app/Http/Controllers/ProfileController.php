@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\EntryResource;
 use App\Http\Resources\TagResource;
-use Carbon\Carbon;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
@@ -19,7 +18,8 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        $user['when'] = (new Carbon($user->created_at))->locale('pl')->diffForHumans(null, \Carbon\CarbonInterface::DIFF_ABSOLUTE);
+        $user = ProfileService::show($user);
+
         return response()->json($user);
     }
     
@@ -31,8 +31,9 @@ class ProfileController extends Controller
      */
     public function posts(User $user)
     {
-        $posty = $user->post()->paginate(15);
-        return PostResource::collection($posty);
+        $posts = ProfileService::posts($user);
+
+        return PostResource::collection($posts);
     }
     
     /**
@@ -43,7 +44,8 @@ class ProfileController extends Controller
      */
     public function entries(User $user)
     {
-        $entries = $user->entry()->paginate(15);
+        $entries = ProfileService::entries($user);
+
         return EntryResource::collection($entries);
     }
     
@@ -55,7 +57,7 @@ class ProfileController extends Controller
      */
     public function tags(User $user)
     {
-        $tags = $user->tag;
+        $tags = ProfileService::tags($user);
         return TagResource::collection($tags);
     }
 }

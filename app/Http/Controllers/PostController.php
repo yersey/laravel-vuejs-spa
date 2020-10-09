@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
 use App\Post;
-use App\Dig;
-use App\Tag;
+use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
-use App\Notifications\TagUse;
-use Illuminate\Support\Facades\Notification;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
@@ -20,8 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posty = Post::orderBy('created_at', 'desc')->paginate(15);
-        return PostResource::collection($posty);
+        $posts = PostService::index();
+
+        return PostResource::collection($posts);
     }
 
     /**
@@ -32,27 +29,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = new Post();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->imgurl = $request->imgurl;
-        $post->user_id = auth()->user()->id;
-        $post->save();
-
-        if($request->tags){
-            $tags = explode(" ", $request->tags);
-            
-            foreach($tags as $tag_){
-                $tag = Tag::where('name', $tag_)->first();
-                if(!$tag){
-                    $post->tag()->save(new Tag(['name' => $tag_]));
-                }else {
-                    $post->tag()->save($tag);
-                } 
-                $users = auth()->user()->whereHas('Tag', function ($query) use ($tag_) {$query->where('name', $tag_);})->get();
-                Notification::send($users, new TagUse('post', $post->id));
-            }
-        }
+        $post = PostService::store($request);
 
         return new PostResource($post);
     }
@@ -79,10 +56,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
         
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->imgurl = $request->imgurl;
-        $post->save();
+        $post = PostService::update($request, $post);
 
         return new PostResource($post);
     }
@@ -97,7 +71,7 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
 
-        $post->delete();
+        PostService::delete($post);
     }
 
     /**
@@ -106,11 +80,11 @@ class PostController extends Controller
      * @param Post $post
      * @return void
      */
-    public function Dig(Post $post)
+    public function dig(Post $post)
     {
         $this->authorize('dig', $post);
 
-        $post->dig()->save(new Dig());
+        PostService::dig($post);
     }
 
     /**
@@ -123,6 +97,6 @@ class PostController extends Controller
     {
         $this->authorize('unDig', $post);
 
-        $post->dig()->where('user_id', auth()->user()->id)->delete();
+        PostService::unDig($post);
     }
 }

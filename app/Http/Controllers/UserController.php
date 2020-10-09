@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
@@ -12,7 +12,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function notifications(){
-        return response()->json(auth()->user()->notifications);
+        $notifications = UserService::notifications();
+
+        return response()->json($notifications);
     }
 
     /**
@@ -22,6 +24,6 @@ class UserController extends Controller
      * @return void
      */
     public function notification_mark_as_read(string $id){
-        auth()->user()->unreadNotifications->where('id', $id)->markAsRead();
+        UserService::notification_mark_as_read($id);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\MessageRequest;
 use App\User;
 use App\Message;
@@ -68,16 +67,16 @@ class MessageController extends Controller
             $conversation = Message::where('conversation', $conversation_id)->get();
             Message::where('conversation', $conversation_id)->where('to_id', auth()->user()->id)->update(array('read_at' => now()));
         }else{
-            $conv = Message::where('to_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->get()->first();
+            $conv = Message::where('to_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->OrderBy('created_at', 'DESC')->first();
             if($conv){
                 $conversation = Message::where('conversation', $conv->conversation)->get();
                 Message::where('conversation', $conv->conversation)->where('to_id', auth()->user()->id)->update(array('read_at' => now()));
-                return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)[0]]);
+                return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)->first()]);
             }else{
                 return response()->json(['messages' => MessageResource::collection([]), 'user' => MessageResource::collection([])]);
             }
             
         }
-		return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)[0]]);
+		return response()->json(['messages' => MessageResource::collection($conversation), 'user' => MessageResource::collection($conversation)->first()]);
     }
 }

@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\CommentRequest;
-use App\Entry;
-use App\Post;
 use App\Comment;
-use App\Plus;
+use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
-use App\Notifications\Mentioned;
-use Illuminate\Support\Facades\Notification;
-
 use App\Services\CommentService;
 
 class CommentController extends Controller

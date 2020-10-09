@@ -2,16 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\EntryRequest;
-use Illuminate\Support\Facades\Validator;
 use App\Entry;
-use App\Tag;
-use App\Plus;
+use App\Http\Requests\EntryRequest;
 use App\Http\Resources\EntryResource;
-use App\Notifications\Mentioned;
-use App\Notifications\TagUse;
-use Illuminate\Support\Facades\Notification;
+use App\Services\MirkoService;
 
 class MirkoController extends Controller
 {
@@ -22,7 +16,8 @@ class MirkoController extends Controller
      */
     public function index()
     {
-        $entries = Entry::orderBy('created_at', 'desc')->paginate(15);
+        $entries = MirkoService::index();
+        
         return EntryResource::collection($entries);
     }
 
@@ -30,56 +25,11 @@ class MirkoController extends Controller
      * Store a newly created entry.
      *
      * @param EntryRequest $request
-     * @return mixed
+     * @return EntryResource
      */
     public function store(EntryRequest $request)
     {
-        $entry = new Entry();
-        $entry->body = filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS);
-        $entry->user_id = auth()->user()->id;
-        $entry->save();
-
-        preg_match_all('/#\w+/', $request->body, $tags);
-        if($tags[0]){
-            $tags = array_unique($tags[0]);
-
-            foreach($tags as $tag__)
-            {
-                $tag_ = substr($tag__, 1);
-
-                $rules = [
-                    'tag' => 'regex:/^[\pL\s]+$/u',
-                ];
-                $customMessages = [
-                    'tag_.regex'  => 'W tagach znajduja się niedozwolone znaki.',
-                ];
-                $validator = Validator::make(['tag' => $tag_], $rules, $customMessages);
-                if($validator->fails()) {
-                    return response()->json($validator->errors(), 422);
-                }
-
-                $tag = Tag::where('name', $tag_)->first();
-                if(!$tag){
-                    $entry->tag()->save(new Tag(['name' => $tag_]));
-                }else {
-                    $entry->tag()->save($tag);
-                } 
-                $users = auth()->user()->whereHas('Tag', function ($query) use ($tag_) {$query->where('name', $tag_);})->get();
-                Notification::send($users, new TagUse('entry', $entry->id));
-            }
-        }
-
-        preg_match_all('/@\w+/', $request->body, $raw_users);
-        if($raw_users[0]){
-            $raw_users = array_unique($raw_users[0]);
-            $mention_users = [];
-            foreach($raw_users as $mention_user){
-                $mention_users[] = substr($mention_user, 1);
-            } 
-            $mentioned = auth()->user()->whereIn('name', $mention_users)->get();
-            Notification::send($mentioned, new Mentioned('entry', $entry->id));
-        }
-
+        $entry = MirkoService::store($request);
         return new EntryResource($entry);
     }
 
@@ -105,8 +55,7 @@ class MirkoController extends Controller
     {
         $this->authorize('update', $entry);
         
-        $entry->body = filter_var($request->body, FILTER_SANITIZE_SPECIAL_CHARS);
-        $entry->save();
+        $entry = MirkoService::update($request, $entry);
 
         return new EntryResource($entry);
     }
@@ -121,7 +70,7 @@ class MirkoController extends Controller
     {
         $this->authorize('delete', $entry);
 
-        $entry->delete();
+        MirkoService::delete($entry);
     }
 
     /**
@@ -134,7 +83,7 @@ class MirkoController extends Controller
     {
         $this->authorize('plus', $entry);
 
-        $entry->plus()->save(new Plus());
+        MirkoService::plus($entry);
     }
 
     /**
@@ -147,6 +96,6 @@ class MirkoController extends Controller
     {
         $this->authorize('unPlus', $entry);
 
-        $entry->plus()->where('user_id', auth()->user()->id)->delete();
+        MirkoService::unPlus($entry);
     }
 }
