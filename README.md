@@ -15,6 +15,7 @@
 * Visual Studio Code
 * Github
 * Google Chrome Debug Console
+* Larastan
 
 ## Features
 * Posts
